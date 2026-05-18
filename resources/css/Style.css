@@ -1,0 +1,293 @@
+/* ============================================================
+   Style.css — Navbar Principal | FORLAWDER
+   ============================================================
+   Fuentes usadas (importadas desde Google Fonts):
+   - "Cormorant Garamond" → títulos / logotipo (serif elegante corporativa)
+   - "Montserrat"         → links de navegación (sans-serif limpia)
+
+   Para cambiar las fuentes, reemplaza los nombres en @import
+   y en las propiedades font-family correspondientes.
+   ============================================================ */
+
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;600&family=Montserrat:wght@300;400;500&display=swap');
+
+/* ============================================================
+   RESET Y BASE
+   ============================================================ */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 300;
+}
+
+/* ============================================================
+   NAVBAR — ESTRUCTURA PRINCIPAL
+   ============================================================
+   La barra se posiciona fija en la parte superior.
+   Al hacer scroll, la clase .scrolled se agrega con JS
+   para activar el efecto de transparencia/fondo.
+
+   → Para cambiar la ALTURA de la barra: modifica --nav-height.
+   → Para cambiar la POSICIÓN (top / bottom): cambia "top: 0"
+     por "bottom: 0" y ajusta el box-shadow si es necesario.
+   ============================================================ */
+
+:root {
+  --nav-height: 70px;             /* Altura de la barra */
+  --nav-bg-solid: #0a0a0a;        /* Color de fondo cuando hay scroll */
+  --nav-bg-transparent: rgba(0, 0, 0, 0.10); /* Fondo al inicio (transparente) */
+  --nav-border-color: rgba(255, 255, 255, 0.12); /* Línea inferior sutil */
+  --nav-text-color: #ffffff;      /* Color del texto / links */
+  --nav-text-hover: #1c1c1c;      /* Color al hacer hover (dorado corporativo) */
+  --nav-transition: 0.45s ease;   /* Velocidad de la transición */
+
+  /* ——— Para cambiar la paleta de colores, edita solo las variables de arriba ——— */
+}
+
+.navbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: var(--nav-height);
+  z-index: 1000;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 5%;          /* ← Cambia este porcentaje para ajustar el padding horizontal */
+
+  background-color: var(--nav-bg-transparent);
+  border-bottom: 1px solid transparent;
+
+  /* Efecto de desenfoque de fondo (glassmorphism suave) */
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+
+  transition:
+    background-color var(--nav-transition),
+    border-color var(--nav-transition),
+    box-shadow var(--nav-transition),
+    backdrop-filter var(--nav-transition);
+}
+
+/* ============================================================
+   ESTADO SCROLLED — se activa con JS al hacer scroll
+   ============================================================
+   Cuando el usuario baja en la página, la barra adquiere
+   fondo sólido oscuro y una sombra elegante.
+
+   → Para desactivar el efecto de scroll: elimina este bloque
+     y quita el listener de scroll en tu archivo JS.
+   → Para usar un color diferente al hacer scroll:
+     edita --nav-bg-solid en :root o sobreescríbelo aquí.
+   ============================================================ */
+
+.navbar.scrolled {
+  background-color: var(--nav-bg-solid);
+  border-bottom-color: var(--nav-border-color);
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.35);
+  backdrop-filter: blur(0px);
+  -webkit-backdrop-filter: blur(0px);
+}
+
+/* ============================================================
+   LOGOTIPO / MARCA
+   ============================================================
+   Usa la fuente serif elegante para el nombre de la empresa.
+
+   → Para cambiar la fuente del logo: modifica font-family aquí.
+   → Para usar una imagen como logo en lugar de texto:
+     reemplaza el elemento <span class="navbar__logo"> por
+     un <img> con su src correspondiente.
+   ============================================================ */
+
+.navbar__logo {
+  font-family: 'Cormorant Garamond', serif;
+  font-weight: 600;
+  font-size: 1.6rem;           /* ← Ajusta el tamaño del logotipo */
+  letter-spacing: 0.12em;
+  color: var(--nav-text-color);
+  text-decoration: none;
+  text-transform: uppercase;
+  transition: color var(--nav-transition);
+}
+
+.navbar__logo:hover {
+  color: var(--nav-text-hover);
+}
+
+/* ============================================================
+   LISTA DE LINKS DE NAVEGACIÓN
+   ============================================================ */
+
+.navbar__links {
+  list-style: none;
+  display: flex;
+  gap: 2.5rem;   /* ← Cambia el espaciado entre links */
+  align-items: center;
+}
+
+.navbar__links a {
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 400;
+  font-size: 0.78rem;          /* ← Tamaño del texto de los links */
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--nav-text-color);
+  text-decoration: none;
+  position: relative;
+  padding-bottom: 4px;
+  transition: color var(--nav-transition);
+}
+
+/* Subrayado animado en hover */
+.navbar__links a::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 0%;
+  height: 1px;
+  background-color: var(--nav-text-hover);
+  transition: width var(--nav-transition);
+}
+
+.navbar__links a:hover {
+  color: var(--nav-text-hover);
+}
+
+.navbar__links a:hover::after {
+  width: 100%;
+}
+
+/* ============================================================
+   LINK ACTIVO — agrega la clase "active" al link de la
+   sección actual (ej. con IntersectionObserver en JS)
+   ============================================================ */
+
+.navbar__links a.active {
+  color: var(--nav-text-hover);
+}
+
+.navbar__links a.active::after {
+  width: 100%;
+}
+
+/* ============================================================
+   BOTÓN CTA OPCIONAL (ej. "Contacto" / "Consultar")
+   ============================================================
+   Para activar el estilo de botón en un link específico,
+   agrega la clase "navbar__cta" al elemento <a>.
+
+   → Para ocultar el botón: elimina este bloque y la clase.
+   → Para cambiar los colores del botón: edita background y color.
+   ============================================================ */
+
+.navbar__links a.navbar__cta {
+  background-color: var(--nav-text-hover);
+  color: #0a0a0a;
+  padding: 0.45rem 1.2rem;
+  border-radius: 2px;
+  font-weight: 500;
+  letter-spacing: 0.14em;
+}
+
+.navbar__links a.navbar__cta::after {
+  display: none; /* Sin subrayado en el botón */
+}
+
+.navbar__links a.navbar__cta:hover {
+  background-color: #ffffff;
+  color: #0a0a0a;
+}
+
+/* ============================================================
+   MENÚ HAMBURGUESA — MÓVIL
+   ============================================================
+   El botón hamburguesa se muestra solo en pantallas pequeñas.
+   Requiere JS para alternar la clase "open" en .navbar__links.
+
+   → Para cambiar el breakpoint móvil: edita "768px" abajo.
+   ============================================================ */
+
+.navbar__toggle {
+  display: none;
+  flex-direction: column;
+  gap: 5px;
+  cursor: pointer;
+  background: none;
+  border: none;
+  padding: 4px;
+}
+
+.navbar__toggle span {
+  display: block;
+  width: 24px;
+  height: 1.5px;
+  background-color: var(--nav-text-color);
+  transition: transform 0.3s ease, opacity 0.3s ease;
+}
+
+/* Animación X al abrir el menú */
+.navbar__toggle.open span:nth-child(1) {
+  transform: translateY(6.5px) rotate(45deg);
+}
+.navbar__toggle.open span:nth-child(2) {
+  opacity: 0;
+}
+.navbar__toggle.open span:nth-child(3) {
+  transform: translateY(-6.5px) rotate(-45deg);
+}
+
+@media (max-width: 768px) {
+  /* ← Cambia 768px para ajustar el breakpoint del menú móvil */
+
+  .navbar__toggle {
+    display: flex;
+  }
+
+  .navbar__links {
+    position: absolute;
+    top: var(--nav-height);
+    left: 0;
+    width: 100%;
+    flex-direction: column;
+    gap: 0;
+    background-color: var(--nav-bg-solid);
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.4s ease, padding 0.4s ease;
+    padding: 0 5%;
+  }
+
+  .navbar__links.open {
+    max-height: 400px; /* ← Aumenta si tienes más links */
+    padding: 1.2rem 5%;
+  }
+
+  .navbar__links a {
+    padding: 0.7rem 0;
+    font-size: 0.85rem;
+  }
+}
+
+/* ============================================================
+   UTILIDAD — Desplazamiento compensado por navbar fija
+   ============================================================
+   Agrega la clase "section-offset" a tus secciones <section>
+   para que el scroll no quede tapado por la barra fija.
+   ============================================================ */
+
+.section-offset {
+  scroll-margin-top: var(--nav-height);
+}
