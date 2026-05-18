@@ -1,9 +1,10 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="FORLAWDER — Servicios legales especializados.">
     <title>FORLAWDER</title>
     <link rel="stylesheet" href="resources/css/Style.css">
 </head>
@@ -13,6 +14,13 @@
         <nav class="navbar">
             <img src="resources/images/FORLAWDER LOGO.png" alt="FORLAWDER Logo" class="logo" width="150" height="100">
 
+            <!-- Botón hamburguesa (visible solo en móvil vía CSS) -->
+            <button class="navbar__toggle" aria-label="Abrir menú" aria-expanded="false">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+
             <ul class="navbar__links">
                 <li><a href="#Inicio">Inicio</a></li>
                 <li><a href="#Nosotros">Nosotros</a></li>
@@ -20,12 +28,32 @@
             </ul>
         </nav>
     </header>
+
     <main>
-        <div style="display: flex; justify-content: center; align-items: center; height: 100vh;">
-            <img src="resources/images/FORLAWDER LOGO.png" alt="FORLAWDER Logo" width="1260" height="800">
-        </div>
+        <!-- SECCIÓN INICIO: Hero con logo centrado -->
+        <section id="Inicio" class="section-offset">
+            <div style="display: flex; justify-content: center; align-items: center; height: 100vh;">
+                <img src="resources/images/FORLAWDER LOGO.png" alt="FORLAWDER Logo" width="1260" height="800"
+                    style="max-width: 90%; height: auto;">
+            </div>
+        </section>
+
+        <!-- SECCIÓN NOSOTROS: placeholder hasta completar nosotros.html -->
+        <section id="Nosotros" class="section-offset" style="min-height: 60vh; display:flex; align-items:center; justify-content:center;">
+            <p style="font-family:'Montserrat',sans-serif; letter-spacing:.1em; text-transform:uppercase; font-size:.85rem;">
+                Conoce más sobre nosotros — próximamente.
+            </p>
+        </section>
+
+        <!-- SECCIÓN CONTACTO: placeholder -->
+        <section id="Contacto" class="section-offset" style="min-height: 60vh; display:flex; align-items:center; justify-content:center;">
+            <p style="font-family:'Montserrat',sans-serif; letter-spacing:.1em; text-transform:uppercase; font-size:.85rem;">
+                Formulario de contacto — próximamente.
+            </p>
+        </section>
     </main>
 
+    <script src="resources/js/navbar.js"></script>
 </body>
 
 </html>
