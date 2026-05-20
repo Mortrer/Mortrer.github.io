@@ -14,7 +14,9 @@
 /* ============================================================
    RESET Y BASE
    ============================================================ */
-*, *::before, *::after {
+*,
+*::before,
+*::after {
   box-sizing: border-box;
   margin: 0;
   padding: 0;
@@ -42,15 +44,36 @@ body {
    ============================================================ */
 
 :root {
-  --nav-height: 70px;             /* Altura de la barra */
-  --nav-bg-solid: #0a0a0a;        /* Color de fondo cuando hay scroll */
-  --nav-bg-transparent: rgba(0, 0, 0, 0.10); /* Fondo al inicio (transparente) */
-  --nav-border-color: rgba(255, 255, 255, 0.12); /* Línea inferior sutil */
-  --nav-text-color: #ffffff;      /* Color del texto / links */
-  --nav-text-hover: #1c1c1c;      /* Color al hacer hover (dorado corporativo) */
-  --nav-transition: 0.45s ease;   /* Velocidad de la transición */
+  /* ——— PALETA DE MARCA ——————————————————————————————————————
+     Colores de la identidad visual de FORLAWDER.
+     Úsalos en todo el sitio para mantener coherencia.
+     → --brand-navy : azul-verde oscuro (fondos, navbar, botones)
+     → --brand-pink : magenta vibrante  (acento, hover, detalles)
+     → --brand-gray : gris claro        (fondos neutros, separadores)
+  ——————————————————————————————————————————————————————— */
+  --brand-navy: #004c5e;
+  --brand-pink: #ff0055;
+  --brand-gray: #e6e9ed;
 
-  /* ——— Para cambiar la paleta de colores, edita solo las variables de arriba ——— */
+  --nav-height: 70px;
+  --nav-bg-solid: var(--brand-navy);
+  --nav-bg-transparent: rgba(0, 0, 0, 0.10);
+  --nav-border-color: rgba(255, 255, 255, 0.12);
+  --nav-text-color: #ffffff;
+  /* hover en links del navbar → rosa de acento */
+  --nav-text-hover: var(--brand-pink);
+  --nav-transition: 0.45s ease;
+
+  /* ——— TARJETA FORMULARIO ——————————————————————————————————
+     → --card-max-width  : ANCHO máximo de la tarjeta
+     → --card-min-height : ALTO mínimo ('auto' recomendado)
+     → --card-padding    : espacio interno de la columna formulario
+  ——————————————————————————————————————————————————————— */
+  --card-max-width:  1150px;
+  --card-min-height: auto;
+  --card-padding:    2.5rem;
+
+  /* ——— Para cambiar la paleta, edita solo las variables de arriba ——— */
 }
 
 .navbar {
@@ -64,7 +87,8 @@ body {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 0 5%;          /* ← Cambia este porcentaje para ajustar el padding horizontal */
+  padding: 0 5%;
+  /* ← Cambia este porcentaje para ajustar el padding horizontal */
 
   background-color: var(--nav-bg-transparent);
   border-bottom: 1px solid transparent;
@@ -114,7 +138,8 @@ body {
 .navbar__logo {
   font-family: 'Cormorant Garamond', serif;
   font-weight: 600;
-  font-size: 1.6rem;           /* ← Ajusta el tamaño del logotipo */
+  font-size: 1.6rem;
+  /* ← Ajusta el tamaño del logotipo */
   letter-spacing: 0.12em;
   color: var(--nav-text-color);
   text-decoration: none;
@@ -133,14 +158,16 @@ body {
 .navbar__links {
   list-style: none;
   display: flex;
-  gap: 2.5rem;   /* ← Cambia el espaciado entre links */
+  gap: 2.5rem;
+  /* ← Cambia el espaciado entre links */
   align-items: center;
 }
 
 .navbar__links a {
   font-family: 'Montserrat', sans-serif;
   font-weight: 400;
-  font-size: 0.78rem;          /* ← Tamaño del texto de los links */
+  font-size: 0.78rem;
+  /* ← Tamaño del texto de los links */
   letter-spacing: 0.18em;
   text-transform: uppercase;
   color: var(--nav-text-color);
@@ -203,7 +230,8 @@ body {
 }
 
 .navbar__links a.navbar__cta::after {
-  display: none; /* Sin subrayado en el botón */
+  display: none;
+  /* Sin subrayado en el botón */
 }
 
 .navbar__links a.navbar__cta:hover {
@@ -242,9 +270,11 @@ body {
 .navbar__toggle.open span:nth-child(1) {
   transform: translateY(6.5px) rotate(45deg);
 }
+
 .navbar__toggle.open span:nth-child(2) {
   opacity: 0;
 }
+
 .navbar__toggle.open span:nth-child(3) {
   transform: translateY(-6.5px) rotate(-45deg);
 }
@@ -271,7 +301,8 @@ body {
   }
 
   .navbar__links.open {
-    max-height: 400px; /* ← Aumenta si tienes más links */
+    max-height: 400px;
+    /* ← Aumenta si tienes más links */
     padding: 1.2rem 5%;
   }
 
@@ -288,6 +319,333 @@ body {
    para que el scroll no quede tapado por la barra fija.
    ============================================================ */
 
+/* ——————————————————————————————————————————————————
+   MEMBRETE — Formas geométricas diagonales (CSS puro)
+   El .banner-container actúa como lienzo transparente
+   que cubre toda la .columna-texto. Las formas se
+   posicionan dentro de él de forma absoluta.
+
+   Para ajustar una forma  → cambia bottom / left de su clase.
+   Para ajustar colores    → edita --brand-navy y --brand-pink en :root.
+—————————————————————————————————————————————————— */
+
+/* Lienzo del membrete — cubre la columna izquierda completa */
+.banner-container {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  pointer-events: none;
+  z-index: 1;
+  background: transparent;
+}
+
+/* Forma 1 — volumen claro trasero (efecto de profundidad) */
+.shape-gray-back {
+  position: absolute;
+  bottom: -50px;
+  left: 30%;
+  width: 320px;
+  height: 420px;
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.07) 0%, rgba(255, 255, 255, 0.01) 100%);
+  transform: skewX(-41deg);
+}
+
+/* Forma 2 — plano claro del frente */
+.shape-gray-front {
+  position: absolute;
+  bottom: -80px;
+  left: 18%;
+  width: 180px;
+  height: 460px;
+  background: linear-gradient(to bottom, rgba(255, 255, 255, 0.06), rgba(255, 255, 255, 0.01));
+  transform: skewX(-41deg);
+}
+
+/* Forma 3 — sombra oscura que define el corte angular */
+.shape-dark-blue {
+  position: absolute;
+  bottom: -50px;
+  left: -80px;
+  width: 340px;
+  height: 380px;
+  background: rgba(0, 20, 30, 0.45);
+  transform: skewX(-41deg);
+}
+
+/* Forma 4 — barra magenta principal
+   → Ancho           : propiedad width
+   → Posición lateral: propiedad left
+   → Brillo          : ajusta el box-shadow */
+.shape-magenta-bar {
+  position: absolute;
+  bottom: -100px;
+  left: -40px;
+  width: 80px;
+  height: 560px;
+  background: var(--brand-pink);
+  transform: skewX(-41deg);
+  box-shadow: 4px 0 28px rgba(255, 0, 85, 0.5);
+}
+
+/* Forma 5 — líneas delgadas magenta flotantes
+   → Posición     : propiedad left del contenedor
+   → Longitudes   : height de ::before y ::after
+   → Transparencia: propiedad opacity */
+.thin-lines-container {
+  position: absolute;
+  bottom: -50px;
+  left: 13%;
+  width: 120px;
+  height: 460px;
+  transform: skewX(-41deg);
+}
+
+.thin-lines-container::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 3px;
+  height: 80%;
+  background: var(--brand-pink);
+  opacity: 0.65;
+}
+
+.thin-lines-container::after {
+  content: '';
+  position: absolute;
+  top: 22%;
+  left: 16px;
+  width: 3px;
+  height: 55%;
+  background: var(--brand-pink);
+  opacity: 0.65;
+}
+
 .section-offset {
   scroll-margin-top: var(--nav-height);
+}
+
+/* ============================================================
+   SECCIÓN CONTACTO — MEMBRETE + FORMULARIO
+   ============================================================
+   La tarjeta se divide en dos columnas:
+   · Izquierda (.columna-texto)      → panel decorativo (membrete)
+   · Derecha  (.columna-formulario)  → formulario de contacto
+
+   Para ajustar tamaños: edita las variables en :root
+     --card-max-width   ancho máximo de la tarjeta completa
+     --card-padding     espacio interno de la columna formulario
+     --brand-navy       color del panel izquierdo y botón
+     --brand-pink       color de acento y hover
+   ============================================================ */
+
+.seccion-contacto {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 6rem 5%;
+  min-height: 100vh;
+}
+
+/* Tarjeta — el padding lo gestionan las columnas individualmente */
+.tarjeta-formulario {
+  width: 100%;
+  max-width: var(--card-max-width);
+  min-height: var(--card-min-height);
+  display: flex;
+  overflow: hidden;
+  border-radius: 12px;
+  box-shadow: 0 24px 64px rgba(0, 0, 0, 0.14);
+}
+
+/* ——————————————————————————————————————————————————
+   COLUMNA IZQUIERDA — PANEL MEMBRETE
+   Fondo: var(--brand-navy).
+   El .banner-container (formas geométricas) se posiciona
+   absolutamente dentro de esta columna.
+   El texto (h2, p) vive sobre las formas gracias a z-index: 2.
+—————————————————————————————————————————————————— */
+.columna-texto {
+  position: relative;
+  overflow: hidden;
+  background: var(--brand-navy);
+  padding: 3rem 2.5rem 3rem 3rem;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  gap: 1.5rem;
+  min-width: 0;
+}
+
+.columna-texto h2 {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 2rem;
+  font-weight: 600;
+  font-weight: bold;
+  color: #ffffff;
+  line-height: 1.25;
+  position: relative;
+  z-index: 2;
+}
+
+.columna-texto > p {
+  font-size: 0.875rem;
+  line-height: 1.8;
+  color: rgba(255, 255, 255, 0.70);
+  position: relative;
+  z-index: 2;
+  max-width: 36ch;
+}
+
+/* ——————————————————————————————————————————————————
+   COLUMNA DERECHA — FORMULARIO
+—————————————————————————————————————————————————— */
+.columna-formulario {
+  flex: 1;
+  background: #ffffff;
+  padding: var(--card-padding);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  min-width: 0;
+}
+
+/* ——— FORMULARIO ——— */
+.formulario {
+  display: grid;
+  gap: 14px;
+}
+
+.grupo-campo {
+  display: grid;
+  gap: 5px;
+}
+
+/* --- CAMPOS EN FILA --- dos campos lado a lado ----------------------
+   Uso en HTML:
+     <div class="grupo-fila">
+       <div class="grupo-campo">...</div>
+       <div class="grupo-campo">...</div>
+     </div>
+   Proporciones: 1fr 1fr = iguales | 2fr 1fr = primero más ancho
+   Colapso móvil: @media (max-width: 480px) más abajo
+-------------------------------------------------------------------- */
+.grupo-fila {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+}
+
+/* Selectores SCOPED — solo afectan elementos dentro de .formulario */
+.formulario label {
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--brand-navy);
+}
+
+.formulario input,
+.formulario textarea {
+  font: inherit;
+  font-size: 0.9rem;
+  border-radius: 6px;
+  border: 1.5px solid #dde1e6;
+  padding: 10px 12px;
+  width: 100%;
+  background: #f9fafc;
+  color: #1a1a2e;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.formulario input:focus,
+.formulario textarea:focus {
+  outline: none;
+  border-color: var(--brand-pink);
+  box-shadow: 0 0 0 3px rgba(255, 0, 85, 0.10);
+  background: #ffffff;
+}
+
+.formulario textarea {
+  min-height: 100px;
+  resize: vertical;
+}
+
+.formulario button {
+  margin-top: 4px;
+  font: inherit;
+  font-size: 0.78rem;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  border-radius: 6px;
+  padding: 13px;
+  background: var(--brand-navy);
+  color: #ffffff;
+  border: 2px solid var(--brand-navy);
+  cursor: pointer;
+  width: 100%;
+  transition: background 0.25s ease, border-color 0.25s ease;
+}
+
+.formulario button:hover {
+  background: var(--brand-pink);
+  border-color: var(--brand-pink);
+}
+
+/* ============================================================
+   RESPONSIVO — TARJETA + FORMULARIO
+   ============================================================
+   Patrón para futuros componentes:
+     @media (max-width: 768px) { .mi-componente { ... } }
+   Solo sobreescribe propiedades que cambian en móvil.
+   ============================================================ */
+
+@media (max-width: 768px) {
+  .seccion-contacto {
+    padding: 5rem 4%;
+    align-items: flex-start;
+  }
+
+  /* Apila columnas verticalmente en tablet / móvil */
+  .tarjeta-formulario {
+    flex-direction: column;
+  }
+
+  .columna-texto {
+    padding: 2.5rem 2rem;
+    min-height: 200px;
+    justify-content: flex-end;
+  }
+
+  .columna-texto h2 {
+    font-size: 1.5rem;
+  }
+
+  /* Oculta el párrafo largo en pantallas pequeñas */
+  .columna-texto > p {
+    display: none;
+  }
+
+  .columna-formulario {
+    padding: 2rem 1.5rem;
+  }
+}
+
+@media (max-width: 480px) {
+  /* Colapsa .grupo-fila a una columna en móvil pequeño.
+     Aplica automáticamente a cualquier .grupo-fila del sitio. */
+  .grupo-fila {
+    grid-template-columns: 1fr;
+  }
+
+  .columna-texto {
+    min-height: 160px;
+  }
+
+  .formulario button {
+    padding: 14px;
+  }
 }

@@ -39,17 +39,71 @@
         </section>
 
         <!-- SECCIÓN NOSOTROS: placeholder hasta completar nosotros.html -->
-        <section id="Nosotros" class="section-offset" style="min-height: 60vh; display:flex; align-items:center; justify-content:center;">
-            <p style="font-family:'Montserrat',sans-serif; letter-spacing:.1em; text-transform:uppercase; font-size:.85rem;">
+        <section id="Nosotros" class="section-offset"
+            style="min-height: 60vh; display:flex; align-items:center; justify-content:center;">
+            <p
+                style="font-family:'Montserrat',sans-serif; letter-spacing:.1em; text-transform:uppercase; font-size:.85rem;">
                 Conoce más sobre nosotros — próximamente.
             </p>
         </section>
 
         <!-- SECCIÓN CONTACTO: placeholder -->
-        <section id="Contacto" class="section-offset" style="min-height: 60vh; display:flex; align-items:center; justify-content:center;">
-            <p style="font-family:'Montserrat',sans-serif; letter-spacing:.1em; text-transform:uppercase; font-size:.85rem;">
-                Formulario de contacto — próximamente.
+        <section style="display:flex; align-items:center; justify-content:center;">
+            <p
+                style="font-family: 'Montserrat', sans-serif; letter-spacing:.1em; text-transform:uppercase; font-size:1.5rem;">
+                Contáctanos
             </p>
+        </section>
+        <section id="Contacto" class="section-offset seccion-contacto">
+            <div class="tarjeta-formulario">
+
+                <div class="columna-texto" style="align-items: center; padding-top: 7rem;">
+                    <h2>¿Tienes alguna consulta?</h2>
+                    <p>En FORLAWDER, estamos aquí para ayudarte. Si tienes alguna pregunta o necesitas asesoramiento
+                        legal, no dudes en contactarnos. Nuestro equipo de expertos está listo para brindarte la
+                        asistencia que necesitas.</p>
+
+                    <div class="banner-container">
+                        <div class="shape-gray-back"></div>
+                        <div class="shape-gray-front"></div>
+                        <div class="thin-lines-container"></div>
+                        <div class="shape-dark-blue"></div>
+                        <div class="shape-magenta-bar"></div>
+                    </div>
+                </div>
+                <div class="columna-formulario">
+                    <form class="formulario" action="" method="post">
+                        <div class="grupo-campo">
+                            <label for="nombre">Nombre</label>
+                            <input type="text" id="nombre" name="nombre" required placeholder="Nombre completo">
+                        </div>
+
+                        <!-- .grupo-fila: dos campos lado a lado
+                         En móvil (<480px) colapsa a una columna automáticamente.
+                         Reutilizable: envuelve cualquier par de .grupo-campo
+                         para ponerlos en la misma fila horizontal. -->
+                        <div class="grupo-fila">
+                            <div class="grupo-campo">
+                                <label for="email">E-mail</label>
+                                <input type="email" id="email" name="email" required placeholder="E-mail">
+                            </div>
+                            <div class="grupo-campo">
+                                <label for="celular">Número de contacto</label>
+                                <input type="tel" id="celular" name="celular" placeholder="Número de contacto">
+                            </div>
+                        </div>
+
+                        <div class="grupo-campo">
+                            <label for="mensaje">Mensaje</label>
+                            <textarea id="mensaje" name="mensaje" rows="4" required
+                                placeholder="Escribe tu mensaje aquí..."></textarea>
+                        </div>
+                        <button type="submit">Enviar</button>
+                    </form>
+
+                </div>
+
+            </div>
         </section>
     </main>
 
