@@ -1,19 +1,5 @@
-/* ============================================================
-   Style.css — Navbar Principal | FORLAWDER
-   ============================================================
-   Fuentes usadas (importadas desde Google Fonts):
-   - "Cormorant Garamond" → títulos / logotipo (serif elegante corporativa)
-   - "Montserrat"         → links de navegación (sans-serif limpia)
-
-   Para cambiar las fuentes, reemplaza los nombres en @import
-   y en las propiedades font-family correspondientes.
-   ============================================================ */
-
 @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;600&family=Montserrat:wght@300;400;500&display=swap');
 
-/* ============================================================
-   RESET Y BASE
-   ============================================================ */
 *,
 *::before,
 *::after {
@@ -31,27 +17,9 @@ body {
   font-weight: 300;
 }
 
-/* ============================================================
-   NAVBAR — ESTRUCTURA PRINCIPAL
-   ============================================================
-   La barra se posiciona fija en la parte superior.
-   Al hacer scroll, la clase .scrolled se agrega con JS
-   para activar el efecto de transparencia/fondo.
-
-   → Para cambiar la ALTURA de la barra: modifica --nav-height.
-   → Para cambiar la POSICIÓN (top / bottom): cambia "top: 0"
-     por "bottom: 0" y ajusta el box-shadow si es necesario.
-   ============================================================ */
-
 :root {
-  /* ——— PALETA DE MARCA ——————————————————————————————————————
-     Colores de la identidad visual de FORLAWDER.
-     Úsalos en todo el sitio para mantener coherencia.
-     → --brand-navy : azul-verde oscuro (fondos, navbar, botones)
-     → --brand-pink : magenta vibrante  (acento, hover, detalles)
-     → --brand-gray : gris claro        (fondos neutros, separadores)
-  ——————————————————————————————————————————————————————— */
-  --brand-navy: #004c5e;
+  
+  --brand-navy: #012E40;
   --brand-pink: #ff0055;
   --brand-gray: #e6e9ed;
 
@@ -60,20 +28,16 @@ body {
   --nav-bg-transparent: rgba(0, 0, 0, 0.10);
   --nav-border-color: rgba(255, 255, 255, 0.12);
   --nav-text-color: #ffffff;
-  /* hover en links del navbar → rosa de acento */
+  
   --nav-text-hover: var(--brand-pink);
   --nav-transition: 0.45s ease;
 
-  /* ——— TARJETA FORMULARIO ——————————————————————————————————
-     → --card-max-width  : ANCHO máximo de la tarjeta
-     → --card-min-height : ALTO mínimo ('auto' recomendado)
-     → --card-padding    : espacio interno de la columna formulario
-  ——————————————————————————————————————————————————————— */
+  
   --card-max-width:  1150px;
   --card-min-height: auto;
   --card-padding:    2.5rem;
 
-  /* ——— Para cambiar la paleta, edita solo las variables de arriba ——— */
+  
 }
 
 .navbar {
@@ -88,12 +52,12 @@ body {
   align-items: center;
   justify-content: space-between;
   padding: 0 5%;
-  /* ← Cambia este porcentaje para ajustar el padding horizontal */
+  
 
   background-color: var(--nav-bg-transparent);
   border-bottom: 1px solid transparent;
 
-  /* Efecto de desenfoque de fondo (glassmorphism suave) */
+  
   backdrop-filter: blur(4px);
   -webkit-backdrop-filter: blur(4px);
 
@@ -104,18 +68,6 @@ body {
     backdrop-filter var(--nav-transition);
 }
 
-/* ============================================================
-   ESTADO SCROLLED — se activa con JS al hacer scroll
-   ============================================================
-   Cuando el usuario baja en la página, la barra adquiere
-   fondo sólido oscuro y una sombra elegante.
-
-   → Para desactivar el efecto de scroll: elimina este bloque
-     y quita el listener de scroll en tu archivo JS.
-   → Para usar un color diferente al hacer scroll:
-     edita --nav-bg-solid en :root o sobreescríbelo aquí.
-   ============================================================ */
-
 .navbar.scrolled {
   background-color: var(--nav-bg-solid);
   border-bottom-color: var(--nav-border-color);
@@ -124,22 +76,11 @@ body {
   -webkit-backdrop-filter: blur(0px);
 }
 
-/* ============================================================
-   LOGOTIPO / MARCA
-   ============================================================
-   Usa la fuente serif elegante para el nombre de la empresa.
-
-   → Para cambiar la fuente del logo: modifica font-family aquí.
-   → Para usar una imagen como logo en lugar de texto:
-     reemplaza el elemento <span class="navbar__logo"> por
-     un <img> con su src correspondiente.
-   ============================================================ */
-
 .navbar__logo {
   font-family: 'Cormorant Garamond', serif;
   font-weight: 600;
   font-size: 1.6rem;
-  /* ← Ajusta el tamaño del logotipo */
+  
   letter-spacing: 0.12em;
   color: var(--nav-text-color);
   text-decoration: none;
@@ -151,15 +92,11 @@ body {
   color: var(--nav-text-hover);
 }
 
-/* ============================================================
-   LISTA DE LINKS DE NAVEGACIÓN
-   ============================================================ */
-
 .navbar__links {
   list-style: none;
   display: flex;
   gap: 2.5rem;
-  /* ← Cambia el espaciado entre links */
+  
   align-items: center;
 }
 
@@ -167,7 +104,7 @@ body {
   font-family: 'Montserrat', sans-serif;
   font-weight: 400;
   font-size: 0.78rem;
-  /* ← Tamaño del texto de los links */
+  
   letter-spacing: 0.18em;
   text-transform: uppercase;
   color: var(--nav-text-color);
@@ -177,7 +114,6 @@ body {
   transition: color var(--nav-transition);
 }
 
-/* Subrayado animado en hover */
 .navbar__links a::after {
   content: '';
   position: absolute;
@@ -197,11 +133,6 @@ body {
   width: 100%;
 }
 
-/* ============================================================
-   LINK ACTIVO — agrega la clase "active" al link de la
-   sección actual (ej. con IntersectionObserver en JS)
-   ============================================================ */
-
 .navbar__links a.active {
   color: var(--nav-text-hover);
 }
@@ -209,16 +140,6 @@ body {
 .navbar__links a.active::after {
   width: 100%;
 }
-
-/* ============================================================
-   BOTÓN CTA OPCIONAL (ej. "Contacto" / "Consultar")
-   ============================================================
-   Para activar el estilo de botón en un link específico,
-   agrega la clase "navbar__cta" al elemento <a>.
-
-   → Para ocultar el botón: elimina este bloque y la clase.
-   → Para cambiar los colores del botón: edita background y color.
-   ============================================================ */
 
 .navbar__links a.navbar__cta {
   background-color: var(--nav-text-hover);
@@ -231,22 +152,13 @@ body {
 
 .navbar__links a.navbar__cta::after {
   display: none;
-  /* Sin subrayado en el botón */
+  
 }
 
 .navbar__links a.navbar__cta:hover {
   background-color: #ffffff;
   color: #0a0a0a;
 }
-
-/* ============================================================
-   MENÚ HAMBURGUESA — MÓVIL
-   ============================================================
-   El botón hamburguesa se muestra solo en pantallas pequeñas.
-   Requiere JS para alternar la clase "open" en .navbar__links.
-
-   → Para cambiar el breakpoint móvil: edita "768px" abajo.
-   ============================================================ */
 
 .navbar__toggle {
   display: none;
@@ -266,7 +178,6 @@ body {
   transition: transform 0.3s ease, opacity 0.3s ease;
 }
 
-/* Animación X al abrir el menú */
 .navbar__toggle.open span:nth-child(1) {
   transform: translateY(6.5px) rotate(45deg);
 }
@@ -280,7 +191,7 @@ body {
 }
 
 @media (max-width: 768px) {
-  /* ← Cambia 768px para ajustar el breakpoint del menú móvil */
+  
 
   .navbar__toggle {
     display: flex;
@@ -302,7 +213,7 @@ body {
 
   .navbar__links.open {
     max-height: 400px;
-    /* ← Aumenta si tienes más links */
+    
     padding: 1.2rem 5%;
   }
 
@@ -312,24 +223,6 @@ body {
   }
 }
 
-/* ============================================================
-   UTILIDAD — Desplazamiento compensado por navbar fija
-   ============================================================
-   Agrega la clase "section-offset" a tus secciones <section>
-   para que el scroll no quede tapado por la barra fija.
-   ============================================================ */
-
-/* ——————————————————————————————————————————————————
-   MEMBRETE — Formas geométricas diagonales (CSS puro)
-   El .banner-container actúa como lienzo transparente
-   que cubre toda la .columna-texto. Las formas se
-   posicionan dentro de él de forma absoluta.
-
-   Para ajustar una forma  → cambia bottom / left de su clase.
-   Para ajustar colores    → edita --brand-navy y --brand-pink en :root.
-—————————————————————————————————————————————————— */
-
-/* Lienzo del membrete — cubre la columna izquierda completa */
 .banner-container {
   position: absolute;
   inset: 0;
@@ -339,7 +232,6 @@ body {
   background: transparent;
 }
 
-/* Forma 1 — volumen claro trasero (efecto de profundidad) */
 .shape-gray-back {
   position: absolute;
   bottom: -50px;
@@ -350,7 +242,6 @@ body {
   transform: skewX(-41deg);
 }
 
-/* Forma 2 — plano claro del frente */
 .shape-gray-front {
   position: absolute;
   bottom: -80px;
@@ -361,7 +252,6 @@ body {
   transform: skewX(-41deg);
 }
 
-/* Forma 3 — sombra oscura que define el corte angular */
 .shape-dark-blue {
   position: absolute;
   bottom: -50px;
@@ -372,10 +262,6 @@ body {
   transform: skewX(-41deg);
 }
 
-/* Forma 4 — barra magenta principal
-   → Ancho           : propiedad width
-   → Posición lateral: propiedad left
-   → Brillo          : ajusta el box-shadow */
 .shape-magenta-bar {
   position: absolute;
   bottom: -100px;
@@ -387,10 +273,6 @@ body {
   box-shadow: 4px 0 28px rgba(255, 0, 85, 0.5);
 }
 
-/* Forma 5 — líneas delgadas magenta flotantes
-   → Posición     : propiedad left del contenedor
-   → Longitudes   : height de ::before y ::after
-   → Transparencia: propiedad opacity */
 .thin-lines-container {
   position: absolute;
   bottom: -50px;
@@ -426,20 +308,6 @@ body {
   scroll-margin-top: var(--nav-height);
 }
 
-/* ============================================================
-   SECCIÓN CONTACTO — MEMBRETE + FORMULARIO
-   ============================================================
-   La tarjeta se divide en dos columnas:
-   · Izquierda (.columna-texto)      → panel decorativo (membrete)
-   · Derecha  (.columna-formulario)  → formulario de contacto
-
-   Para ajustar tamaños: edita las variables en :root
-     --card-max-width   ancho máximo de la tarjeta completa
-     --card-padding     espacio interno de la columna formulario
-     --brand-navy       color del panel izquierdo y botón
-     --brand-pink       color de acento y hover
-   ============================================================ */
-
 .seccion-contacto {
   display: flex;
   justify-content: center;
@@ -448,7 +316,6 @@ body {
   min-height: 100vh;
 }
 
-/* Tarjeta — el padding lo gestionan las columnas individualmente */
 .tarjeta-formulario {
   width: 100%;
   max-width: var(--card-max-width);
@@ -459,13 +326,6 @@ body {
   box-shadow: 0 24px 64px rgba(0, 0, 0, 0.14);
 }
 
-/* ——————————————————————————————————————————————————
-   COLUMNA IZQUIERDA — PANEL MEMBRETE
-   Fondo: var(--brand-navy).
-   El .banner-container (formas geométricas) se posiciona
-   absolutamente dentro de esta columna.
-   El texto (h2, p) vive sobre las formas gracias a z-index: 2.
-—————————————————————————————————————————————————— */
 .columna-texto {
   position: relative;
   overflow: hidden;
@@ -483,7 +343,6 @@ body {
   font-family: 'Cormorant Garamond', serif;
   font-size: 2rem;
   font-weight: 600;
-  font-weight: bold;
   color: #ffffff;
   line-height: 1.25;
   position: relative;
@@ -499,9 +358,6 @@ body {
   max-width: 36ch;
 }
 
-/* ——————————————————————————————————————————————————
-   COLUMNA DERECHA — FORMULARIO
-—————————————————————————————————————————————————— */
 .columna-formulario {
   flex: 1;
   background: #ffffff;
@@ -512,7 +368,6 @@ body {
   min-width: 0;
 }
 
-/* ——— FORMULARIO ——— */
 .formulario {
   display: grid;
   gap: 14px;
@@ -523,22 +378,12 @@ body {
   gap: 5px;
 }
 
-/* --- CAMPOS EN FILA --- dos campos lado a lado ----------------------
-   Uso en HTML:
-     <div class="grupo-fila">
-       <div class="grupo-campo">...</div>
-       <div class="grupo-campo">...</div>
-     </div>
-   Proporciones: 1fr 1fr = iguales | 2fr 1fr = primero más ancho
-   Colapso móvil: @media (max-width: 480px) más abajo
--------------------------------------------------------------------- */
 .grupo-fila {
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 16px;
 }
 
-/* Selectores SCOPED — solo afectan elementos dentro de .formulario */
 .formulario label {
   font-size: 0.72rem;
   font-weight: 600;
@@ -595,21 +440,13 @@ body {
   border-color: var(--brand-pink);
 }
 
-/* ============================================================
-   RESPONSIVO — TARJETA + FORMULARIO
-   ============================================================
-   Patrón para futuros componentes:
-     @media (max-width: 768px) { .mi-componente { ... } }
-   Solo sobreescribe propiedades que cambian en móvil.
-   ============================================================ */
-
 @media (max-width: 768px) {
   .seccion-contacto {
     padding: 5rem 4%;
     align-items: flex-start;
   }
 
-  /* Apila columnas verticalmente en tablet / móvil */
+  
   .tarjeta-formulario {
     flex-direction: column;
   }
@@ -624,7 +461,7 @@ body {
     font-size: 1.5rem;
   }
 
-  /* Oculta el párrafo largo en pantallas pequeñas */
+  
   .columna-texto > p {
     display: none;
   }
@@ -635,8 +472,7 @@ body {
 }
 
 @media (max-width: 480px) {
-  /* Colapsa .grupo-fila a una columna en móvil pequeño.
-     Aplica automáticamente a cualquier .grupo-fila del sitio. */
+  
   .grupo-fila {
     grid-template-columns: 1fr;
   }
@@ -647,5 +483,633 @@ body {
 
   .formulario button {
     padding: 14px;
+  }
+}
+
+.contenedor {
+  width: 100%;
+  max-width: 1200px;
+  margin-inline: auto;
+  padding-inline: 5%;
+}
+
+.etiqueta-seccion {
+  display: inline-block;
+  font-size: 0.68rem;
+  font-weight: 600;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+  color: var(--brand-pink);
+}
+
+.titulo-seccion {
+  font-family: 'Cormorant Garamond', serif;
+  font-weight: 600;
+  font-size: clamp(1.75rem, 3vw, 2.4rem);
+  line-height: 1.2;
+  color: var(--brand-navy);
+}
+
+.seccion-encabezado {
+  text-align: center;
+  margin-bottom: 3.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+}
+
+.seccion-encabezado__subtitulo {
+  font-size: 0.9rem;
+  line-height: 1.85;
+  color: #5a6573;
+  max-width: 55ch;
+  margin-inline: auto;
+}
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.75rem 1.75rem;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 0.76rem;
+  font-weight: 600;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  text-decoration: none;
+  border-radius: 4px;
+  border: 2px solid transparent;
+  cursor: pointer;
+  transition: background 0.25s ease, color 0.25s ease, border-color 0.25s ease;
+}
+
+.btn--primary {
+  background: var(--brand-navy);
+  color: #ffffff;
+  border-color: var(--brand-navy);
+}
+
+.btn--primary:hover {
+  background: var(--brand-pink);
+  border-color: var(--brand-pink);
+}
+
+.btn--outline {
+  background: transparent;
+  color: var(--brand-navy);
+  border-color: var(--brand-navy);
+}
+
+.btn--outline:hover {
+  background: var(--brand-navy);
+  color: #ffffff;
+}
+
+.btn--outline-blanco {
+  background: transparent;
+  color: #ffffff;
+  border-color: rgba(255, 255, 255, 0.65);
+}
+
+.btn--outline-blanco:hover {
+  background: #ffffff;
+  color: var(--brand-navy);
+  border-color: #ffffff;
+}
+
+.hero {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  padding: calc(var(--nav-height) + 3rem) 5% 5rem;
+  text-align: center;
+  overflow: hidden;
+  background: #ffffff;
+}
+
+.hero::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg,
+      rgba(1, 46, 64, 0.04) 0%,
+      transparent 55%);
+  pointer-events: none;
+}
+
+.hero::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 5%;
+  right: 5%;
+  height: 1px;
+  background: linear-gradient(to right, transparent, var(--brand-pink) 50%, transparent);
+}
+
+.hero__contenido {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.75rem;
+  max-width: 760px;
+}
+
+.hero__logo {
+  max-width: min(400px, 78vw);
+  height: auto;
+}
+
+.hero__tagline {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(0.95rem, 2.2vw, 1.35rem);
+  font-weight: 300;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--brand-navy);
+  opacity: 0.70;
+}
+
+.hero__acciones {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.hero__scroll {
+  position: absolute;
+  bottom: 2rem;
+  left: 50%;
+  transform: translateX(-50%);
+  color: var(--brand-navy);
+  opacity: 0.35;
+  text-decoration: none;
+  transition: opacity 0.3s ease;
+  animation: hero-bounce 2.2s ease-in-out infinite;
+}
+
+.hero__scroll:hover {
+  opacity: 0.75;
+}
+
+@keyframes hero-bounce {
+  0%, 100% { transform: translateX(-50%) translateY(0);    }
+  50%       { transform: translateX(-50%) translateY(7px); }
+}
+
+.seccion-intro {
+  padding: 6rem 0;
+  background: #ffffff;
+}
+
+.intro__grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 5rem;
+  align-items: center;
+}
+
+.intro__texto {
+  display: flex;
+  flex-direction: column;
+  gap: 1.2rem;
+}
+
+.intro__texto p {
+  font-size: 0.92rem;
+  line-height: 1.9;
+  color: #4a5568;
+}
+
+.intro__btn {
+  align-self: flex-start;
+}
+
+.intro__visual {}
+
+.visual-placeholder {
+  position: relative;
+  aspect-ratio: 4 / 3;
+  background: var(--brand-gray);
+  border-radius: 10px;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.visual-placeholder__marco {
+  position: absolute;
+  inset: 12px;
+  border-radius: 6px;
+  border: 1.5px dashed rgba(1, 46, 64, 0.22);
+}
+
+.visual-placeholder__acento {
+  position: absolute;
+  bottom: 0;
+  left: -20px;
+  width: 80px;
+  height: 100%;
+  background: var(--brand-pink);
+  opacity: 0.07;
+  transform: skewX(-8deg);
+}
+
+.visual-placeholder__texto {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 0.8rem;
+  color: #7a8694;
+  text-align: center;
+  position: relative;
+  z-index: 1;
+  line-height: 1.9;
+}
+
+.visual-placeholder__texto small {
+  font-size: 0.7rem;
+  opacity: 0.7;
+}
+
+.seccion-pilares {
+  padding: 6rem 0;
+  background: #f4f6f8;
+}
+
+.pilares__grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 1.75rem;
+}
+
+.pilar {
+  background: #ffffff;
+  border-radius: 10px;
+  padding: 2.5rem 2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  transition: box-shadow 0.35s ease, transform 0.35s ease;
+}
+
+.pilar:hover {
+  box-shadow: 0 14px 48px rgba(1, 46, 64, 0.10);
+  transform: translateY(-5px);
+}
+
+.pilar__icono {
+  width: 48px;
+  height: 48px;
+  color: var(--brand-navy);
+  transition: color 0.3s ease;
+}
+
+.pilar:hover .pilar__icono {
+  color: var(--brand-pink);
+}
+
+.pilar__icono svg {
+  width: 100%;
+  height: 100%;
+}
+
+.pilar h3 {
+  font-family: 'Cormorant Garamond', serif;
+  font-weight: 600;
+  font-size: 1.25rem;
+  color: var(--brand-navy);
+}
+
+.pilar p {
+  font-size: 0.875rem;
+  line-height: 1.85;
+  color: #5a6573;
+}
+
+.seccion-servicios {
+  padding: 6rem 0;
+  background: #ffffff;
+}
+
+.servicios__grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 1.75rem;
+}
+
+.tarjeta-servicio {
+  border: 1.5px solid #e4e8ed;
+  border-radius: 10px;
+  padding: 2.25rem 2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease, transform 0.3s ease;
+}
+
+.tarjeta-servicio:hover {
+  border-color: var(--brand-navy);
+  box-shadow: 0 10px 40px rgba(1, 46, 64, 0.09);
+  transform: translateY(-4px);
+}
+
+.tarjeta-servicio__icono {
+  width: 46px;
+  height: 46px;
+  color: var(--brand-navy);
+  transition: color 0.3s ease;
+  flex-shrink: 0;
+}
+
+.tarjeta-servicio:hover .tarjeta-servicio__icono {
+  color: var(--brand-pink);
+}
+
+.tarjeta-servicio__icono svg {
+  width: 100%;
+  height: 100%;
+}
+
+.tarjeta-servicio h3 {
+  font-family: 'Cormorant Garamond', serif;
+  font-weight: 600;
+  font-size: 1.2rem;
+  color: var(--brand-navy);
+}
+
+.tarjeta-servicio p {
+  font-size: 0.875rem;
+  line-height: 1.85;
+  color: #5a6573;
+}
+
+.tarjeta-servicio__enlace {
+  margin-top: auto;
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--brand-pink);
+  text-decoration: none;
+  transition: opacity 0.2s ease;
+}
+
+.tarjeta-servicio__enlace:hover {
+  opacity: 0.65;
+}
+
+.seccion-stats {
+  padding: 5rem 0;
+  background: var(--brand-navy);
+}
+
+.stats__grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 0;
+  text-align: center;
+}
+
+.stat {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  padding: 2rem 1rem;
+  border-right: 1px solid rgba(255, 255, 255, 0.10);
+}
+
+.stat:last-child {
+  border-right: none;
+}
+
+.stat__num {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(2.4rem, 4vw, 3.4rem);
+  font-weight: 600;
+  color: #ffffff;
+  line-height: 1;
+}
+
+.stat__label {
+  font-size: 0.70rem;
+  font-weight: 500;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.50);
+}
+
+.seccion-cta {
+  padding: 7rem 0;
+  background: linear-gradient(135deg, #012E40 0%, #01455f 100%);
+  text-align: center;
+}
+
+.cta__contenido {
+  max-width: 680px;
+  margin-inline: auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.5rem;
+}
+
+.cta__titulo {
+  
+  color: #ffffff !important;
+}
+
+.cta__subtitulo {
+  font-size: 0.9rem;
+  line-height: 1.85;
+  color: rgba(255, 255, 255, 0.60);
+  max-width: 50ch;
+}
+
+.footer {
+  background: #06141c;
+  color: rgba(255, 255, 255, 0.55);
+  padding-top: 4.5rem;
+}
+
+.footer__grid {
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr;
+  gap: 3rem;
+  padding-bottom: 3rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.07);
+}
+
+.footer__logo {
+  max-width: 110px;
+  height: auto;
+  margin-bottom: 1.25rem;
+  display: block;
+}
+
+.footer__marca p {
+  font-size: 0.82rem;
+  line-height: 1.85;
+  max-width: 30ch;
+  color: rgba(255, 255, 255, 0.42);
+}
+
+.footer__nav h4,
+.footer__info h4 {
+  font-family: 'Cormorant Garamond', serif;
+  font-weight: 600;
+  font-size: 1.05rem;
+  color: #ffffff;
+  margin-bottom: 1.25rem;
+  letter-spacing: 0.05em;
+}
+
+.footer__nav ul {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 0.7rem;
+}
+
+.footer__nav a {
+  color: rgba(255, 255, 255, 0.48);
+  text-decoration: none;
+  font-size: 0.82rem;
+  letter-spacing: 0.05em;
+  transition: color 0.2s ease;
+}
+
+.footer__nav a:hover {
+  color: var(--brand-pink);
+}
+
+.footer__info p {
+  font-size: 0.82rem;
+  line-height: 1.9;
+  color: rgba(255, 255, 255, 0.42);
+  margin-bottom: 0.4rem;
+}
+
+.footer__base {
+  padding: 1.5rem 0;
+  text-align: center;
+  font-size: 0.72rem;
+  letter-spacing: 0.08em;
+  color: rgba(255, 255, 255, 0.25);
+}
+
+[data-reveal] {
+  transition: opacity 0.65s ease, transform 0.65s ease;
+}
+
+html.js-reveal [data-reveal] {
+  opacity: 0;
+  transform: translateY(28px);
+}
+
+html.js-reveal [data-reveal="left"] {
+  transform: translateX(-32px);
+}
+
+html.js-reveal [data-reveal="right"] {
+  transform: translateX(32px);
+}
+
+html.js-reveal [data-reveal].is-visible {
+  opacity: 1;
+  transform: none;
+}
+
+html.js-reveal [data-delay="1"] { transition-delay: 0.10s; }
+html.js-reveal [data-delay="2"] { transition-delay: 0.20s; }
+html.js-reveal [data-delay="3"] { transition-delay: 0.30s; }
+html.js-reveal [data-delay="4"] { transition-delay: 0.40s; }
+
+@media (max-width: 1024px) {
+  
+  .stats__grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .stat {
+    border-right: none;
+  }
+
+  .stat:nth-child(odd) {
+    border-right: 1px solid rgba(255, 255, 255, 0.10);
+  }
+}
+
+@media (max-width: 768px) {
+  
+  .hero__acciones {
+    flex-direction: column;
+    width: 100%;
+    max-width: 280px;
+  }
+
+  .hero__acciones .btn {
+    width: 100%;
+  }
+
+  
+  .intro__grid {
+    grid-template-columns: 1fr;
+    gap: 2.5rem;
+  }
+
+  
+  .intro__visual {
+    order: -1;
+  }
+
+  .intro__btn {
+    align-self: stretch;
+    text-align: center;
+  }
+
+  
+
+  
+
+  
+  .footer__grid {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+
+  
+  .seccion-intro,
+  .seccion-pilares,
+  .seccion-servicios {
+    padding: 4.5rem 0;
+  }
+
+  .seccion-cta {
+    padding: 5rem 0;
+  }
+}
+
+@media (max-width: 480px) {
+  
+  .stats__grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .stat:nth-child(odd) {
+    border-right: 1px solid rgba(255, 255, 255, 0.10);
+  }
+
+  .pilar {
+    padding: 2rem 1.5rem;
+  }
+
+  .tarjeta-servicio {
+    padding: 1.75rem 1.5rem;
   }
 }

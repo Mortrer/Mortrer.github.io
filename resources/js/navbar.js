@@ -1,12 +1,3 @@
-/* ============================================================
-   navbar.js — Comportamiento del navbar | FORLAWDER
-   ============================================================
-   1. Efecto scroll: agrega/quita la clase .scrolled en .navbar
-   2. Menú hamburguesa: toggle de .open en botón y lista
-   3. Cierre del menú al hacer clic en un link (móvil)
-   4. IntersectionObserver: marca el link activo según la sección visible
-   ============================================================ */
-
 (function () {
   'use strict';
 
@@ -15,7 +6,7 @@
   const menu    = document.querySelector('.navbar__links');
   const links   = document.querySelectorAll('.navbar__links a');
 
-  /* ——— 1. Efecto scroll ——— */
+  
   function onScroll() {
     if (window.scrollY > 20) {
       navbar.classList.add('scrolled');
@@ -24,9 +15,9 @@
     }
   }
   window.addEventListener('scroll', onScroll, { passive: true });
-  onScroll(); // estado inicial
+  onScroll();
 
-  /* ——— 2. Hamburguesa ——— */
+  
   if (toggle && menu) {
     toggle.addEventListener('click', function () {
       const isOpen = menu.classList.toggle('open');
@@ -35,7 +26,7 @@
     });
   }
 
-  /* ——— 3. Cerrar menú al navegar (móvil) ——— */
+  
   links.forEach(function (link) {
     link.addEventListener('click', function () {
       menu.classList.remove('open');
@@ -44,7 +35,7 @@
     });
   });
 
-  /* ——— 4. Link activo con IntersectionObserver ——— */
+  
   const sections = document.querySelectorAll('section[id]');
 
   if (sections.length && 'IntersectionObserver' in window) {
@@ -68,4 +59,38 @@
       observer.observe(section);
     });
   }
+})();
+
+(function () {
+  'use strict';
+
+  
+  document.documentElement.classList.add('js-reveal');
+
+  var revealEls = document.querySelectorAll('[data-reveal]');
+
+  
+  if (!revealEls.length) return;
+
+  if (!('IntersectionObserver' in window)) {
+    revealEls.forEach(function (el) { el.classList.add('is-visible'); });
+    return;
+  }
+
+  var revealObserver = new IntersectionObserver(
+    function (entries, obs) {
+      entries.forEach(function (entry) {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('is-visible');
+          obs.unobserve(entry.target); 
+        }
+      });
+    },
+    {
+      threshold: 0.13,
+      rootMargin: '0px 0px -40px 0px' 
+    }
+  );
+
+  revealEls.forEach(function (el) { revealObserver.observe(el); });
 })();
