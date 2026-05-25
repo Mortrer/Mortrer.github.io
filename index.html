@@ -7,6 +7,9 @@
     <meta name="description" content="FORLAWDER — Servicios legales especializados.">
     <title>FORLAWDER</title>
     <link rel="stylesheet" href="resources/css/Style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400&display=swap" rel="stylesheet">
     <link rel="stylesheet"
         href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&icon_names=construction" />
 </head>
@@ -14,7 +17,11 @@
 <body>
     <header>
         <nav class="navbar">
-            <img src="resources/images/FORLAWDER LOGO.png" alt="FORLAWDER Logo" class="logo" width="150" height="100">
+            <!-- <img src="resources/images/FORLAWDER LOGO.png" alt="FORLAWDER Logo" class="logo" width="150" height="100"> -->
+            <div class="logo-container">
+                <h1 class="logo-title">FORLAWDER</h1>
+                <span class="logo-subtitle">ABOGADOS - AUDITORES</span>
+            </div>
 
             
             <button class="navbar__toggle" aria-label="Abrir menú" aria-expanded="false">
@@ -26,7 +33,13 @@
             <ul class="navbar__links">
                 <li><a href="#Inicio">Inicio</a></li>
                 <li><a href="#Nosotros">Nosotros</a></li>
-                <li><a href="#Servicios">Servicios</a></li>
+                <li class="navbar__dropdown">
+                    <a href="#Servicios">Servicios</a>
+                    <ul class="navbar__submenu">
+                        <li><a href="#Servicios_legal">Área Legal</a></li>
+                        <li><a href="#Servicios_auditoria">Área de Auditoría</a></li>
+                    </ul>
+                </li>
                 <li><a href="#Contacto">Contacto</a></li>
             </ul>
         </nav>
@@ -63,14 +76,14 @@
                             Firma de abogados comprometida con sus intereses
                         </h2>
                         <p>
-                            Texto de ejemplo — Descripción general de la firma. Aquí puede detallar
+                            <!-- Texto de ejemplo — Descripción general de la firma. Aquí puede detallar
                             la historia, misión y visión del equipo. Este párrafo es un marcador de
-                            posición que debe reemplazarse por el contenido definitivo.
+                            posición que debe reemplazarse por el contenido definitivo. -->
                         </p>
                         <p>
-                            Segundo párrafo de ejemplo. Puede usarse para ampliar la descripción,
+                            <!-- Segundo párrafo de ejemplo. Puede usarse para ampliar la descripción,
                             destacar logros o mencionar el enfoque diferenciador de FORLAWDER frente
-                            a otras firmas legales del mercado.
+                            a otras firmas legales del mercado. -->
                         </p>
                         <a href="#Contacto" class="btn btn--primary intro__btn">Agendar consulta</a>
                     </div>
@@ -166,7 +179,7 @@
                 <div class="seccion-encabezado" data-reveal>
                     <span class="etiqueta-seccion">Lo que hacemos</span>
                     <h2 class="titulo-seccion">Nuestros servicios</h2>
-                    <h3 class="titulo-seccion__subtitulo">Área Legal</h3>
+                    <h3  id="Servicios_legal" class="titulo-seccion__subtitulo">Área Legal</h3>
                     <!-- <p class="seccion-encabezado__subtitulo">
                         Texto de ejemplo — Descripción breve de las áreas de práctica.
                         Reemplaza este texto con la propuesta de valor de cada servicio.
@@ -301,7 +314,7 @@
 
             <div class="contenedor" style="margin-top: 4rem;">
                 <div class="seccion-encabezado" data-reveal>
-                    <h3 class="titulo-seccion__subtitulo">Área de Auditoría</h3>
+                    <h3 id="Servicios_auditoria" class="titulo-seccion__subtitulo">Área de Auditoría</h3>
                     <!-- <p class="seccion-encabezado__subtitulo">
                         Texto de ejemplo — Descripción breve de las áreas de práctica.
                         Reemplaza este texto con la propuesta de valor de cada servicio.
