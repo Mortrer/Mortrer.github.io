@@ -94,3 +94,29 @@
 
   revealEls.forEach(function (el) { revealObserver.observe(el); });
 })();
+
+/* ─── Carrete de imágenes ─────────────────────────────── */
+(function () {
+  'use strict';
+
+  var pista   = document.getElementById('carretePista');
+  var btnPrev = document.getElementById('carretePrev');
+  var btnNext = document.getElementById('carreteNext');
+
+  if (!pista || !btnPrev || !btnNext) return;
+
+  function desplazamiento() {
+    var item = pista.querySelector('.carrete__item');
+    if (!item) return pista.clientWidth;
+    var gap = parseFloat(getComputedStyle(pista).gap) || 20;
+    return item.offsetWidth + gap;
+  }
+
+  btnPrev.addEventListener('click', function () {
+    pista.scrollBy({ left: -desplazamiento(), behavior: 'smooth' });
+  });
+
+  btnNext.addEventListener('click', function () {
+    pista.scrollBy({ left: desplazamiento(), behavior: 'smooth' });
+  });
+})();
