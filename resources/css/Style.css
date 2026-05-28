@@ -664,21 +664,23 @@ body {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  min-height: 100vh;
-  padding: calc(var(--nav-height) + 3rem) 5% 5rem;
+  min-height: clamp(420px, 60vh, 680px);
+  padding: calc(var(--nav-height) + 2rem) 5% 3.5rem;
   text-align: center;
   overflow: hidden;
-  background: #ffffff;
+  background: var(--brand-navy);
 }
 
 .hero::before {
   content: '';
   position: absolute;
   inset: 0;
-  background: linear-gradient(135deg,
-      rgba(1, 46, 64, 0.04) 0%,
-      transparent 55%);
+  background: linear-gradient(to bottom,
+      rgba(1, 46, 64, 0.55) 0%,
+      rgba(1, 46, 64, 0.35) 50%,
+      rgba(1, 46, 64, 0.65) 100%);
   pointer-events: none;
+  z-index: 1;
 }
 
 .hero::after {
@@ -693,7 +695,7 @@ body {
 
 .hero__contenido {
   position: relative;
-  z-index: 1;
+  z-index: 2;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -701,21 +703,46 @@ body {
   max-width: 760px;
 }
 
+/* ── Contenedor del fondo del hero ───────────────────────
+   Ajusta width/height aquí para controlar cuánto ocupa.
+   Por defecto cubre todo el hero (100% × 100%).
+   Ejemplos:
+     width: 80%;  height: 70%;   → recorte centrado
+     top: 0; height: 60%;        → solo la mitad superior
+──────────────────────────────────────────────────────── */
+.hero__fondo-wrap {
+  position: absolute;
+  inset: 0;          /* cambia a top/left/width/height para recortar */
+  z-index: 0;
+  overflow: hidden;
+}
+
+/* La imagen siempre llena su contenedor sin deformarse */
+.hero__fondo {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  display: block;
+}
+
+/* Mantener por compatibilidad si se usa logo img aparte */
 .hero__logo {
   max-width: min(400px, 78vw);
   height: auto;
+  position: relative;
+  z-index: 2;
 }
 
 .hero__tagline {
   font-family: 'Cormorant Garamond', serif;
   font-size: clamp(0.95rem, 2.2vw, 1.35rem);
-  font-weight: 300;
+  font-weight: 1000;
   letter-spacing: 0.14em;
   text-transform: uppercase;
-  color: var(--brand-navy);
-  opacity: 0.70;
+  color: #ffffff;
+  opacity: 0.90;
 }
-
 .hero__acciones {
   display: flex;
   gap: 1rem;
@@ -728,8 +755,9 @@ body {
   bottom: 2rem;
   left: 50%;
   transform: translateX(-50%);
-  color: var(--brand-navy);
-  opacity: 0.35;
+  color: #ffffff;
+  opacity: 0.55;
+  z-index: 2;
   text-decoration: none;
   transition: opacity 0.3s ease;
   animation: hero-bounce 2.2s ease-in-out infinite;
@@ -1233,7 +1261,7 @@ html.js-reveal [data-delay="4"] {
   letter-spacing: 1px;
   margin: 0;
   line-height: 1;
-  color: #000000;
+  color: #ffffff;
 }
 
 .logo-subtitle {
@@ -1241,7 +1269,7 @@ html.js-reveal [data-delay="4"] {
   font-weight: 400;
   letter-spacing: 1px;
   margin: 0;
-  color: #000000;
+  color: #ffffff;
 }
 
 /* Transición y cambio de color cuando la navbar tiene la clase .scrolled (scroll) */
@@ -1723,3 +1751,4 @@ html.js-reveal [data-delay="4"] {
     padding: 2rem 1.5rem 2.5rem;
   }
 }
+
