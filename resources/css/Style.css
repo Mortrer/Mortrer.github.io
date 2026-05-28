@@ -1,5 +1,3 @@
-@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;600&family=Montserrat:wght@300;400;500&display=swap');
-
 *,
 *::before,
 *::after {
@@ -20,11 +18,13 @@ body {
 :root {
 
   --brand-navy: #012E40;
+  --brand-foot: #06141c;
   --brand-pink: #ff0055;
   --brand-gray: #e6e9ed;
 
   --nav-height: 70px;
   --nav-bg-solid: var(--brand-navy);
+  --nav-bg-solid-footer: var(--brand-foot);
   --nav-bg-transparent: rgba(0, 0, 0, 0.10);
   --nav-border-color: rgba(255, 255, 255, 0.12);
   --nav-text-color: #ffffff;
@@ -69,7 +69,7 @@ body {
 }
 
 .navbar.scrolled {
-  background-color: var(--nav-bg-solid);
+  background-color: var(--nav-bg-solid-footer);
   border-bottom-color: var(--nav-border-color);
   box-shadow: 0 4px 30px rgba(0, 0, 0, 0.35);
   backdrop-filter: blur(0px);
@@ -110,7 +110,7 @@ body {
   left: 0;
   min-width: 200px;
   list-style: none;
-  background-color: var(--nav-bg-solid);
+  background-color: var(--nav-bg-solid-footer);
   border-bottom: 1px solid var(--nav-border-color);
   border-radius: 0 0 4px 4px;
   padding: 0.5rem 0;
@@ -828,9 +828,10 @@ body {
 .visual-placeholder__img {
   position: relative;
   inset: 0; 
-  width: 83%;
+  width: 94.8%;
   height: 93%;
   object-fit: cover;
+  border-radius: 1.1%;
 }
 
 .seccion-pilares {
@@ -1299,6 +1300,7 @@ html.js-reveal [data-delay="4"] {
   width: 100%;
   height: 100%;
   object-fit: cover;
+  object-position: center;
   display: block;
 }
 
@@ -1347,5 +1349,377 @@ html.js-reveal [data-delay="4"] {
   .carrete__nav {
     width: 32px;
     height: 32px;
+  }
+}
+
+/* ═══════════════════════════════════════════════════════════
+   LIGHTBOX
+   Dos columnas: imagen fija (izq) | texto con scroll (der)
+═══════════════════════════════════════════════════════════ */
+
+/* Cursor e interactividad en los ítems del carrete */
+.carrete__item {
+  position: relative;
+  cursor: pointer;
+  transition: transform 0.2s ease;
+}
+
+.carrete__item:hover {
+  transform: scale(1.02);
+}
+
+/* Overlay sutil al hacer hover */
+.carrete__item::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: rgba(1, 46, 64, 0);
+  transition: background 0.25s ease;
+}
+
+.carrete__item:hover::after {
+  background: rgba(1, 46, 64, 0.15);
+}
+
+.carrete__item:focus-visible {
+  outline: 2px solid var(--brand-pink);
+  outline-offset: 3px;
+}
+
+/* ── Overlay oscuro de fondo ──────────────────────────────
+   Oculto por defecto. Al añadir .lb-activo se muestra
+   con transición suave de opacidad. */
+.lb-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 1100;
+  background: rgba(1, 46, 64, 0.88);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1.25rem;           /* espacio entre las flechas y la tarjeta */
+  padding: 1.5rem;
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.3s ease, visibility 0.3s ease;
+  will-change: opacity;
+}
+
+.lb-overlay.lb-activo {
+  opacity: 1;
+  visibility: visible;
+}
+
+/* ── Tarjeta central ──────────────────────────────────────
+   Dos columnas: imagen fija | info con scroll.
+   flex:1 1 auto permite que la tarjeta ocupe el espacio
+   disponible DESPUÉS de reservar sitio a las flechas. */
+.lb-card {
+  position: relative;
+  display: flex;
+  flex: 1 1 auto;        /* ocupa el espacio sobrante, NO width:100% */
+  min-width: 0;          /* evita desbordamiento en flex */
+  max-width: 960px;
+  max-height: 84vh;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 40px 100px rgba(0, 0, 0, 0.5);
+  transform: scale(0.96) translateY(8px);
+  transition: transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
+  will-change: transform;
+}
+
+.lb-overlay.lb-activo .lb-card {
+  transform: scale(1) translateY(0);
+}
+
+/* ── Columna izquierda: panel‑marco (no hace scroll) ────────
+   Funciona como paspartout: el fondo navy rodea la foto
+   con padding generoso. La imagen se centra y respeta
+   sus proporciones originales gracias a object‑fit:contain.
+   El box‑shadow multicapa crea el efecto de marco físico. */
+.lb-imagen {
+  flex: 0 0 44%;
+  position: relative;
+  background: var(--brand-navy);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2.5rem 2rem;
+  overflow: hidden;
+}
+
+/* Línea rosa en el borde izquierdo — acento siempre visible */
+.lb-imagen::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 4px;
+  height: 100%;
+  background: var(--brand-pink);
+  box-shadow: 0 0 20px rgba(255, 0, 85, 0.55);
+  z-index: 2;
+}
+
+/* Brillo sutil en esquina inferior derecha */
+.lb-imagen::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse at 115% 115%, rgba(255, 0, 85, 0.07) 0%, transparent 55%);
+  pointer-events: none;
+}
+
+/* ┌─────────────────────────────────────────────────────────┐
+   │  TAMAÑO DE LA FOTO EN EL LIGHTBOX                       │
+   │  Ajusta estas propiedades para controlar cómo se        │
+   │  muestra la imagen dentro del marco navy.               │
+   │                                                         │
+   │  • max-width / max-height: límites máximos de la foto.  │
+   │    Se expresan como % del panel o como unidades vh/vw.  │
+   │    Por defecto la foto no supera el 82% del ancho del   │
+   │    panel y 74vh de alto para dejar margen de paspartout │
+   │                                                         │
+   │  • width / height: "auto" respeta las proporciones      │
+   │    originales. Cámbialo a un valor fijo (ej. 260px)     │
+   │    para forzar un tamaño concreto.                       │
+   │                                                         │
+   │  • object-fit: "contain" muestra la foto íntegra.       │
+   │    Usa "cover" si prefieres que llene el espacio         │
+   │    recortando los bordes.                                │
+   │                                                         │
+   │  • border-radius: redondeo de las esquinas de la foto.  │
+   └─────────────────────────────────────────────────────────┘ */
+.lb-imagen img {
+  /* --- Dimensiones --- */
+  max-width:  82%;           /* % del ancho del panel‑marco  */
+  max-height: calc(84vh - 5rem); /* altura máxima descontando padding de la tarjeta */
+  width:  auto;              /* "auto" conserva proporciones; pon px para fijar ancho  */
+  height: auto;              /* ídem para alto                                         */
+
+  /* --- Ajuste de imagen --- */
+  object-fit: contain;       /* "contain" → foto íntegra | "cover" → relleno recortado */
+
+  /* --- Apariencia --- */
+  border-radius: 3px;        /* redondeo de esquinas de la foto (0 = sin redondeo)     */
+
+  /* (no modificar lo de abajo salvo que quieras cambiar el marco) */
+  position: relative;
+  z-index: 1;
+  display: block;
+  /* Marco fotográfico: borde blanco fino → franja navy → borde exterior */
+  box-shadow:
+    0 0 0 1px rgba(255, 255, 255, 0.25),
+    0 0 0 7px rgba(1, 46, 64, 0.9),
+    0 0 0 8px rgba(255, 255, 255, 0.10),
+    0 24px 64px rgba(0, 0, 0, 0.55);
+  opacity: 1;
+  transition: opacity 0.3s ease;
+}
+
+/* Cuando no hay foto: oculta el img */
+.lb-imagen--vacia img {
+  opacity: 0;
+}
+
+/* Placeholder con nombre de la firma — visible solo sin foto */
+.lb-imagen__placeholder {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.6rem;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.lb-imagen--vacia .lb-imagen__placeholder {
+  opacity: 1;
+}
+
+.lb-imagen__placeholder-nombre {
+  font-family: 'Raleway', sans-serif;
+  font-size: 1.15rem;
+  font-weight: 300;
+  letter-spacing: 0.22em;
+  color: rgba(255, 255, 255, 0.85);
+  text-transform: uppercase;
+}
+
+.lb-imagen__placeholder-sub {
+  font-family: 'Raleway', sans-serif;
+  font-size: 0.55rem;
+  letter-spacing: 0.28em;
+  color: rgba(255, 255, 255, 0.38);
+  text-transform: uppercase;
+}
+
+/* ── Columna derecha: INFO (SOLO esta columna tiene scroll)
+   overflow-y:auto activa el desplazamiento únicamente aquí.
+   El panel de imagen permanece completamente estático. */
+.lb-info {
+  flex: 1;
+  min-width: 0;
+  background: #ffffff;
+  padding: 3rem 2.5rem;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.lb-info::-webkit-scrollbar        { width: 4px; }
+.lb-info::-webkit-scrollbar-track  { background: var(--brand-gray); }
+.lb-info::-webkit-scrollbar-thumb  { background: var(--brand-navy); border-radius: 2px; }
+.lb-info::-webkit-scrollbar-thumb:hover { background: var(--brand-pink); }
+
+.lb-titulo {
+  color: var(--brand-navy);
+  font-size: clamp(1.4rem, 2.5vw, 2rem);
+  margin-bottom: 0;
+}
+
+/* Cargo / puesto del miembro del equipo */
+.lb-cargo {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 0.78rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--brand-pink);
+  padding-left: 0.75rem;
+  border-left: 2px solid var(--brand-pink);
+  margin: 0;
+}
+
+.lb-cargo:empty {
+  display: none;
+}
+
+/* Línea divisora entre cargo y biografía */
+.lb-divisor {
+  border: none;
+  border-top: 1px solid var(--brand-gray);
+  margin: 0.25rem 0;
+}
+
+.lb-texto {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 0.9rem;
+  line-height: 1.9;
+  color: #4a5568;
+}
+
+/* ── Botones de navegación prev/next ───────────────────────
+   Flotan a los lados de la tarjeta, fuera de .lb-card.
+   Se muestran al hacer hover sobre el overlay o la tarjeta.
+   Ocultos si solo hay un item. */
+.lb-nav {
+  flex-shrink: 0;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  border: 1.5px solid rgba(255, 255, 255, 0.30);
+  background: rgba(1, 46, 64, 0.65);
+  color: #ffffff;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.2s ease, border-color 0.2s ease, transform 0.2s ease;
+  z-index: 10;
+}
+
+.lb-nav:hover {
+  background: var(--brand-pink);
+  border-color: var(--brand-pink);
+  transform: scale(1.1);
+}
+
+.lb-nav:focus-visible {
+  outline: 2px solid var(--brand-pink);
+  outline-offset: 3px;
+}
+
+.lb-nav[hidden] {
+  visibility: hidden;
+  pointer-events: none;
+}
+
+/* ── Botón cerrar ─────────────────────────────────────── */
+.lb-cerrar {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  z-index: 10;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  border: 1.5px solid rgba(255, 255, 255, 0.35);
+  background: rgba(1, 46, 64, 0.75);
+  color: #ffffff;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.2s ease, border-color 0.2s ease, transform 0.2s ease;
+}
+
+.lb-cerrar:hover {
+  background: var(--brand-pink);
+  border-color: var(--brand-pink);
+  transform: scale(1.1);
+}
+
+.lb-cerrar:focus-visible {
+  outline: 2px solid var(--brand-pink);
+  outline-offset: 3px;
+}
+
+/* ── Responsivo: en móvil imagen arriba, texto abajo ─── */
+@media (max-width: 680px) {
+  .lb-overlay {
+    padding: 0.75rem 0.5rem;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
+  /* Flechas más pequeñas en móvil, siguen siendo flex siblings */
+  .lb-nav {
+    width: 36px;
+    height: 36px;
+    flex-shrink: 0;
+  }
+
+  .lb-card {
+    flex-direction: column;
+    max-width: 100%;
+    max-height: 92vh;
+    border-radius: 16px 16px 0 0;
+    transform: scale(1) translateY(60px);
+  }
+
+  .lb-overlay.lb-activo .lb-card {
+    transform: scale(1) translateY(0);
+  }
+
+  .lb-imagen {
+    flex: 0 0 220px;
+    padding: 1.5rem 1.25rem;
+  }
+
+  .lb-imagen img {
+    max-height: calc(220px - 3rem);
+  }
+
+  .lb-info {
+    padding: 2rem 1.5rem 2.5rem;
   }
 }

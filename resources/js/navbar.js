@@ -1,12 +1,12 @@
 (function () {
   'use strict';
 
-  const navbar  = document.querySelector('.navbar');
-  const toggle  = document.querySelector('.navbar__toggle');
-  const menu    = document.querySelector('.navbar__links');
-  const links   = document.querySelectorAll('.navbar__links a');
+  const navbar = document.querySelector('.navbar');
+  const toggle = document.querySelector('.navbar__toggle');
+  const menu = document.querySelector('.navbar__links');
+  const links = document.querySelectorAll('.navbar__links a');
 
-  
+
   function onScroll() {
     if (window.scrollY > 20) {
       navbar.classList.add('scrolled');
@@ -17,7 +17,7 @@
   window.addEventListener('scroll', onScroll, { passive: true });
   onScroll();
 
-  
+
   if (toggle && menu) {
     toggle.addEventListener('click', function () {
       const isOpen = menu.classList.toggle('open');
@@ -26,7 +26,7 @@
     });
   }
 
-  
+
   links.forEach(function (link) {
     link.addEventListener('click', function () {
       menu.classList.remove('open');
@@ -35,7 +35,7 @@
     });
   });
 
-  
+
   const sections = document.querySelectorAll('section[id]');
 
   if (sections.length && 'IntersectionObserver' in window) {
@@ -64,12 +64,12 @@
 (function () {
   'use strict';
 
-  
+
   document.documentElement.classList.add('js-reveal');
 
   var revealEls = document.querySelectorAll('[data-reveal]');
 
-  
+
   if (!revealEls.length) return;
 
   if (!('IntersectionObserver' in window)) {
@@ -82,13 +82,13 @@
       entries.forEach(function (entry) {
         if (entry.isIntersecting) {
           entry.target.classList.add('is-visible');
-          obs.unobserve(entry.target); 
+          obs.unobserve(entry.target);
         }
       });
     },
     {
       threshold: 0.13,
-      rootMargin: '0px 0px -40px 0px' 
+      rootMargin: '0px 0px -40px 0px'
     }
   );
 
@@ -99,7 +99,7 @@
 (function () {
   'use strict';
 
-  var pista   = document.getElementById('carretePista');
+  var pista = document.getElementById('carretePista');
   var btnPrev = document.getElementById('carretePrev');
   var btnNext = document.getElementById('carreteNext');
 
@@ -118,5 +118,168 @@
 
   btnNext.addEventListener('click', function () {
     pista.scrollBy({ left: desplazamiento(), behavior: 'smooth' });
+  });
+})();
+
+/* ─── Lightbox ─────────────────────────────────────────────── */
+(function () {
+  'use strict';
+
+  var overlay = document.getElementById('lightbox');
+  if (!overlay) return;
+
+  var imgEl = document.getElementById('lbImg');
+  var lbImagen = document.getElementById('lbImagen');
+  var etiquetaEl = document.getElementById('lbEtiqueta');
+  var tituloEl = document.getElementById('lbTitulo');
+  var cargoEl = document.getElementById('lbCargo');
+  var textoEl = document.getElementById('lbTexto');
+  var btnCerrar = document.getElementById('lbCerrar');
+  var btnPrev = document.getElementById('lbPrev');
+  var btnNext = document.getElementById('lbNext');
+  var lbInfo     = overlay.querySelector('.lb-info');
+  var pista       = document.getElementById('carretePista'); /* cacheado: evita re-query en cada navegación */
+  var ultimoFoco  = null;
+
+  /* Lista de ítems del carrete — se recopilará al abrir por primera vez */
+  var items        = [];
+  var indiceActual = -1;
+
+  function recopilarItems() {
+    items = Array.prototype.slice.call(
+      document.querySelectorAll('.carrete__item')
+    );
+  }
+
+  /* ── Seguridad: solo rutas relativas ──────────────────────────
+     Rechaza cualquier valor con protocolo (javascript:, data:,
+     http:, https:, //) antes de asignarlo a img.src.           */
+  function sanitizarSrc(src) {
+    if (!src || typeof src !== 'string') return '';
+    if (/^([\w\-+.]+:|\/{2})/i.test(src)) return '';
+    return src;
+  }
+
+  /* ── Caché de imágenes ─────────────────────────────────────────
+     Guarda referencias a objetos Image pre-creados para evitar
+     re-descargas al navegar entre miembros.                     */
+  var imgCache = Object.create(null);
+
+  function prefetchImg(src) {
+    src = sanitizarSrc(src);
+    if (!src || imgCache[src]) return;
+    var img = new Image();
+    img.src = src;
+    if (typeof img.decode === 'function') {
+      img.decode().catch(function () {});
+    }
+    imgCache[src] = img;
+  }
+
+  /* Pre-carga silenciosa del ítem anterior y siguiente */
+  function prefetchVecinos(indice) {
+    if (indice > 0) {
+      prefetchImg(items[indice - 1].getAttribute('data-lb-src') || '');
+    }
+    if (indice < items.length - 1) {
+      prefetchImg(items[indice + 1].getAttribute('data-lb-src') || '');
+    }
+  }
+
+  function poblarModal(item) {
+    var src  = sanitizarSrc(item.getAttribute('data-lb-src') || '');
+    var etiq = item.getAttribute('data-lb-etiqueta') || '';
+    var tit = item.getAttribute('data-lb-titulo') || '';
+    var cargo = item.getAttribute('data-lb-cargo') || '';
+    var texto = item.getAttribute('data-lb-texto') || '';
+
+    if (src) {
+      imgEl.src = src;
+      imgEl.alt = tit;
+      lbImagen.classList.remove('lb-imagen--vacia');
+    } else {
+      imgEl.src = '';
+      imgEl.alt = '';
+      lbImagen.classList.add('lb-imagen--vacia');
+    }
+
+    etiquetaEl.textContent = etiq;
+    tituloEl.textContent = tit;
+    if (cargoEl) cargoEl.textContent = cargo;
+    textoEl.textContent = texto;
+
+    if (lbInfo) lbInfo.scrollTop = 0;
+  }
+
+  function actualizarFlechas() {
+    /* Ocultar flecha si no hay item en esa dirección */
+    if (btnPrev) { indiceActual > 0 ? btnPrev.removeAttribute('hidden') : btnPrev.setAttribute('hidden', ''); }
+    if (btnNext) { indiceActual < items.length - 1 ? btnNext.removeAttribute('hidden') : btnNext.setAttribute('hidden', ''); }
+  }
+
+  function abrir(item) {
+    if (!items.length) recopilarItems();
+    indiceActual = items.indexOf(item);
+
+    poblarModal(item);
+    actualizarFlechas();
+    prefetchVecinos(indiceActual);
+
+    ultimoFoco = item;
+    overlay.classList.add('lb-activo');
+    document.body.style.overflow = 'hidden';
+    if (btnCerrar) btnCerrar.focus();
+  }
+
+  function navegar(delta) {
+    var nuevoIndice = indiceActual + delta;
+    if (nuevoIndice < 0 || nuevoIndice >= items.length) return;
+    indiceActual = nuevoIndice;
+    var item = items[indiceActual];
+
+    poblarModal(item);
+    actualizarFlechas();
+    prefetchVecinos(indiceActual);
+
+    /* Sincronizar el scroll del carrete para que el ítem activo sea visible */
+    if (pista) item.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
+
+    ultimoFoco = item;
+  }
+
+  function cerrar() {
+    overlay.classList.remove('lb-activo');
+    document.body.style.overflow = '';
+    if (ultimoFoco) {
+      ultimoFoco.focus();
+      ultimoFoco = null;
+    }
+  }
+
+  document.querySelectorAll('.carrete__item').forEach(function (item) {
+    item.addEventListener('click', function () { abrir(item); });
+    item.addEventListener('keydown', function (e) {
+      if (e.key === 'Enter' || e.key === ' ') {
+        e.preventDefault();
+        abrir(item);
+      }
+    });
+  });
+
+  if (btnPrev) btnPrev.addEventListener('click', function () { navegar(-1); });
+  if (btnNext) btnNext.addEventListener('click', function () { navegar(1); });
+  if (btnCerrar) btnCerrar.addEventListener('click', cerrar);
+
+  /* Cerrar al hacer clic en el fondo oscuro (fuera de la tarjeta) */
+  overlay.addEventListener('click', function (e) {
+    if (e.target === overlay) cerrar();
+  });
+
+  /* Teclado: Escape cierra, flechas navegan */
+  document.addEventListener('keydown', function (e) {
+    if (!overlay.classList.contains('lb-activo')) return;
+    if (e.key === 'Escape') { cerrar(); }
+    if (e.key === 'ArrowLeft') { navegar(-1); }
+    if (e.key === 'ArrowRight') { navegar(1); }
   });
 })();

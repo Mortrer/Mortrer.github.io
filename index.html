@@ -5,13 +5,13 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="FORLAWDER — Servicios legales especializados.">
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self'; connect-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self';">
+    <link rel="preload" as="image" href="resources/images/FORLAWDER LOGO.png">
     <title>FORLAWDER</title>
     <link rel="stylesheet" href="resources/css/Style.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400&family=Raleway:wght@300;400&display=swap" rel="stylesheet">
-    <link rel="stylesheet"
-        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&icon_names=construction" />
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;600&family=Montserrat:wght@300;400;500&family=Raleway:wght@300;400&display=swap" rel="stylesheet">
 </head>
 
 <body>
@@ -35,8 +35,8 @@
                 <li class="navbar__dropdown">
                     <a href="#Servicios">Servicios</a>
                     <ul class="navbar__submenu">
-                        <li><a href="#Servicios_legal">Área Legal</a></li>
-                        <li><a href="#Servicios_auditoria">Área de Auditoría</a></li>
+                        <li><a href="#Servicios_legal">Legal</a></li>
+                        <li><a href="#Servicios_auditoria">Auditoría</a></li>
                     </ul>
                 </li>
                 <li><a href="#Contacto">Contacto</a></li>
@@ -50,7 +50,7 @@
             <div class="hero__contenido">
                 <img src="resources/images/FORLAWDER LOGO.png" alt="FORLAWDER Logo" class="hero__logo" width="480"
                     height="305">
-                <p class="hero__tagline">Asesoría legal especializada &middot; Defensa de sus intereses</p>
+                <p class="hero__tagline">Tú construyes el futuro que quieres &middot; Nosotros ayudamos a protegerlo.</p>
                 <div class="hero__acciones">
                     <a href="#Servicios" class="btn btn--outline">Ver servicios</a>
                     <a href="#Contacto" class="btn btn--primary">Consulta ahora</a>
@@ -75,12 +75,11 @@
                             Firma de abogados comprometida con sus intereses
                         </h2>
                         <p>
-                            Somos una firma multidisciplinaria de abogados y auditores que combina experiencia legal y financiera para ofrecer 
-                            soluciones integrales y prácticas a empresas y particulares. Nos destacamos por un enfoque personalizado, 
-                            asesoría estratégica basada en conocimiento técnico actualizado y un compromiso con la ética, 
-                            la confidencialidad y la excelencia en la ejecución. Acompañamos a nuestros clientes en asuntos corporativos, 
-                            fiscales, laborales, regulatorios y de auditoría, aportando claridad, prevención de riesgos y resultados 
-                            orientados al negocio.
+                            Hay personas que trabajan años para construir algo importante... <br>
+                            y lo terminan poniendo en riesgo por decisiones legales o financieras que nadie les
+                            explicó a tiempo.
+                            Somos Abogados y Auditores enfocados a ayudarte a proteger lo que has construido, reducir riesgos
+                            y darte claridad antes de tomar decisiones importantes. 
                         </p>
                         <a href="#Contacto" class="btn btn--primary intro__btn">Agendar consulta</a>
                     </div>
@@ -90,8 +89,10 @@
                         <div class="visual-placeholder">
                             <img src="resources/images/forlawder-office.jpeg"
                                  alt="Oficinas FORLAWDER"
+                                 loading="lazy"
+                                 decoding="async"
+                                 width="800" height="534"
                                  class="visual-placeholder__img">
-                            <div class="visual-placeholder__marco"></div>
                         </div>
                     </div>
 
@@ -121,8 +122,8 @@
                         </div>
                         <h3>Integridad</h3>
                         <p>
-                            Actuamos con honestidad y transparencia en todas nuestras acciones,
-                            manteniendo la confidencialidad y éstandares éticos que garantizan la confianza y credibilidad.
+                            Tú información, tus decisiones y tu tranquilidad no son negociables y merecen ser tratados con seriedad,
+                            ética y absoluta discreción.
                         </p>
                     </div>
 
@@ -143,8 +144,8 @@
                         </div>
                         <h3>Justicia</h3>
                         <p>
-                            Promovemos soluciones equitativas y respetuosas del marco legal, defendiendo los derechos
-                            de nuestros clientes con rigor profesional y criterio imparcial.
+                            Defender tus derechos no deberia sentirse como una pelea imposible. <br>
+                            Por eso buscamos soluciones claras, justas y bien hechas desde el principio.
                         </p>
                     </div>
 
@@ -158,8 +159,8 @@
                         </div>
                         <h3>Compromiso</h3>
                         <p>
-                            Nos implicamos con dedicación en cada caso, ofreciendo respuestas ágiles y efectivas,
-                            buscando resultados sostenibles que protejan los intereses de quienes nos confían su gestión.
+                            Nuestro trabajo no termina cuando respondemos un mensaje.
+                            Termina cuando sabes que tus intereses están protegidos.
                         </p>
                     </div>
 
@@ -394,13 +395,7 @@
                     </article>
                 </div>
             </div>
-        </section>
-
-        
-        
-
-        
-        <!-- ▸ Carrete de imágenes ─────────────────────────── -->
+        </section>        
         <section class="seccion-carrete">
             <div class="contenedor">
                 <div class="seccion-encabezado" data-reveal>
@@ -415,12 +410,41 @@
                     </svg>
                 </button>
                 <div class="carrete__pista" id="carretePista">
-                    <!-- Para añadir imagen: <div class="carrete__item"><img src="ruta.jpg" alt="descripción"></div> -->
-                    <div class="carrete__item carrete__item--vacio"><span>Imagen 1</span></div>
-                    <div class="carrete__item carrete__item--vacio"><span>Imagen 2</span></div>
-                    <div class="carrete__item carrete__item--vacio"><span>Imagen 3</span></div>
-                    <div class="carrete__item carrete__item--vacio"><span>Imagen 4</span></div>
-                    <div class="carrete__item carrete__item--vacio"><span>Imagen 5</span></div>
+                    <div class="carrete__item carrete__item--vacio"
+                         tabindex="0" role="button" aria-label="Ver perfil"
+                         data-lb-src="resources/images/example1.png"
+                         data-lb-etiqueta="Área de práctica"
+                         data-lb-titulo="Nombre del Miembro"
+                         data-lb-cargo="Cargo o Puesto"
+                         data-lb-texto="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat."><span><img src="resources/images/example1.png" alt="Nombre del Miembro" loading="lazy" decoding="async"></span></div>
+                    <div class="carrete__item carrete__item--vacio"
+                         tabindex="0" role="button" aria-label="Ver perfil"
+                         data-lb-src="resources/images/example2.png"
+                         data-lb-etiqueta="Área de práctica"
+                         data-lb-titulo="Nombre del Miembro"
+                         data-lb-cargo="Cargo o Puesto"
+                         data-lb-texto="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat."><span><img src="resources/images/example2.png" alt="Nombre del Miembro" loading="lazy" decoding="async"></span></div>
+                    <div class="carrete__item carrete__item--vacio"
+                         tabindex="0" role="button" aria-label="Ver perfil"
+                         data-lb-src="resources/images/example3.png"
+                         data-lb-etiqueta="Área de práctica"
+                         data-lb-titulo="Nombre del Miembro"
+                         data-lb-cargo="Cargo o Puesto"
+                         data-lb-texto="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat."><span><img src="resources/images/example3.png" alt="Nombre del Miembro" loading="lazy" decoding="async"></span></div>
+                    <div class="carrete__item carrete__item--vacio"
+                         tabindex="0" role="button" aria-label="Ver perfil"
+                         data-lb-src="resources/images/example4.png"
+                         data-lb-etiqueta="Área de práctica"
+                         data-lb-titulo="Nombre del Miembro"
+                         data-lb-cargo="Cargo o Puesto"
+                         data-lb-texto="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat."><span><img src="resources/images/example4.png" alt="Nombre del Miembro" loading="lazy" decoding="async"></span></div>
+                    <div class="carrete__item carrete__item--vacio"
+                         tabindex="0" role="button" aria-label="Ver perfil"
+                         data-lb-src="resources/images/example7.png"
+                         data-lb-etiqueta="Área de práctica"
+                         data-lb-titulo="Nombre del Miembro"
+                         data-lb-cargo="Cargo o Puesto"
+                         data-lb-texto="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat."><span><img src="resources/images/example7.png" alt="Nombre del Miembro" loading="lazy" decoding="async"></span></div>
                 </div>
                 <button class="carrete__nav carrete__nav--next" id="carreteNext" aria-label="Siguiente">
                     <svg width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true">
@@ -436,10 +460,6 @@
                     <h2 class="titulo-seccion cta__titulo">
                         ¿Listo para resolver su situación legal?
                     </h2>
-                    <!-- <p class="cta__subtitulo">
-                        Texto de ejemplo — Mensaje motivacional que invite al usuario a tomar
-                        acción. Directo, concreto y orientado al contacto.
-                    </p> -->
                     <a href="#Contacto" class="btn btn--outline-blanco">Contactar ahora</a>
                 </div>
             </div>
@@ -507,7 +527,7 @@
                         <h1 class="logo-title" style="text-align:left; color: #ffffff;">FORLAWDER</h1>
                         <h3 class="logo-subtitle" style="text-align:left; color: #ffffff; padding-left: 1.5rem;">Abogados y Auditores</h3>
                     </div>
-                    <p style="padding-top: 1rem;">Somos un despacho multidiciplinario de abogados y auditores que combina experiencia legal y financiera.</p>
+                    <p style="padding-top: 1rem;">Somos una firma de abogados y auditores que combina experiencia legal y financiera.</p>
                 </div>
 
                 <div class="footer__nav">
@@ -534,7 +554,46 @@
         </div>
     </footer>
 
-    <script src="resources/js/navbar.js"></script>
+    <div class="lb-overlay" id="lightbox" role="dialog" aria-modal="true" aria-labelledby="lbTitulo">
+        <!-- Flecha anterior: fuera de .lb-card para no distorsionar el layout -->
+        <button class="lb-nav lb-nav--prev" id="lbPrev" aria-label="Anterior">
+            <svg width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true">
+                <path d="M11 4L6 9l5 5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+        </button>
+        <div class="lb-card">
+            <button class="lb-cerrar" id="lbCerrar" aria-label="Cerrar imagen">
+                <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+                    <path d="M2 2l12 12M14 2L2 14" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+                </svg>
+            </button>
+            <!-- Columna izquierda: imagen enmarcada (esta columna NO hace scroll) -->
+            <div class="lb-imagen" id="lbImagen">
+                <img src="" alt="" id="lbImg">
+                <!-- Placeholder visible solo cuando no hay foto -->
+                <div class="lb-imagen__placeholder" aria-hidden="true">
+                    <span class="lb-imagen__placeholder-nombre">FORLAWDER</span>
+                    <span class="lb-imagen__placeholder-sub">Abogados &amp; Auditores</span>
+                </div>
+            </div>
+            <!-- Columna derecha: información del miembro (SOLO esta columna tiene scroll) -->
+            <div class="lb-info">
+                <span class="etiqueta-seccion" id="lbEtiqueta">Área</span>
+                <h2 class="titulo-seccion lb-titulo" id="lbTitulo"></h2>
+                <p class="lb-cargo" id="lbCargo"></p>
+                <hr class="lb-divisor">
+                <div class="lb-texto" id="lbTexto"></div>
+            </div>
+        </div>
+        <!-- Flecha siguiente -->
+        <button class="lb-nav lb-nav--next" id="lbNext" aria-label="Siguiente">
+            <svg width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true">
+                <path d="M7 4l5 5-5 5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+        </button>
+    </div>
+
+    <script src="resources/js/navbar.js" defer></script>
 </body>
 
 </html>
