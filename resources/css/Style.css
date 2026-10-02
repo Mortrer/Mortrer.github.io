@@ -273,8 +273,24 @@ body {
   }
 
   .navbar__links a {
-    padding: 0.7rem 0;
+    padding: 0.7rem 0 0.7rem 0.85rem;
     font-size: 0.85rem;
+  }
+
+  /* En móvil: barra vertical izquierda — solo se activa por sección, sin hover */
+  .navbar__links a::after {
+    bottom: auto;
+    top: 50%;
+    left: 0;
+    transform: translateY(-50%);
+    width: 2px;
+    height: 0%;
+    transition: height var(--nav-transition);
+  }
+
+  .navbar__links a.active::after {
+    width: 2px;
+    height: 50%;
   }
 
   /* Submenu en móvil: siempre visible, integrado en el flujo */
@@ -296,11 +312,14 @@ body {
     font-size: 0.65rem;
     letter-spacing: 0.12em;
     color: rgba(255, 255, 255, 0.55);
-    border-left: 1px solid var(--nav-text-hover);
+    border-left: 1px solid rgba(255, 255, 255, 0.15);
+    transition: color var(--nav-transition), border-left-color var(--nav-transition);
   }
 
-  .navbar__submenu li a:hover {
+  .navbar__submenu li a:hover,
+  .navbar__submenu li a.active {
     color: var(--nav-text-hover);
+    border-left-color: var(--nav-text-hover);
   }
 }
 
@@ -724,6 +743,12 @@ body {
   object-fit: cover;
   object-position: center;
   display: block;
+  opacity: 0;
+  transition: opacity 360ms ease;
+}
+
+.hero__fondo.loaded {
+  opacity: 1;
 }
 
 /* Mantener por compatibilidad si se usa logo img aparte */
@@ -735,7 +760,7 @@ body {
 }
 
 .hero__tagline {
-  font-family: 'Cormorant Garamond', serif;
+  font-family: 'Montserrat', sans-serif;
   font-size: clamp(0.95rem, 2.2vw, 1.35rem);
   font-weight: 1000;
   letter-spacing: 0.14em;
@@ -860,6 +885,16 @@ body {
   height: 93%;
   object-fit: cover;
   border-radius: 1.1%;
+}
+
+/* Fade-in helper for responsive images (aplica a .responsive-img) */
+.responsive-img {
+  opacity: 0;
+  transition: opacity 360ms ease;
+  will-change: opacity;
+}
+.responsive-img.loaded {
+  opacity: 1;
 }
 
 .seccion-pilares {
@@ -1071,7 +1106,7 @@ body {
 }
 
 .footer__logo {
-  max-width: 110px;
+  max-width: 95px;
   height: auto;
   margin-bottom: 1.25rem;
   display: block;
@@ -1082,6 +1117,7 @@ body {
   line-height: 1.85;
   max-width: 30ch;
   color: rgba(255, 255, 255, 0.42);
+  margin-top: 0;
 }
 
 .footer__nav h4,
@@ -1253,6 +1289,9 @@ html.js-reveal [data-delay="4"] {
 .logo-container {
   text-align: center;
   font-family: 'Raleway', sans-serif;
+  position: relative;
+  display: flex;
+  align-items: center;
 }
 
 .logo-title {
@@ -1281,6 +1320,51 @@ html.js-reveal [data-delay="4"] {
 .navbar.scrolled .logo-title,
 .navbar.scrolled .logo-subtitle {
   color: var(--nav-text-color);
+}
+
+.logo-img {
+  height: 75px;
+  width: auto;
+  position: absolute;
+  transition: opacity 0.45s ease;
+  object-fit: contain;
+}
+
+.logo-img--claro {
+  opacity: 0;
+  object-position: center 45%;
+}
+
+.logo-img--oscuro {
+  opacity: 1;
+  object-position: center 25%;
+}
+
+.navbar.scrolled .logo-img--claro {
+  opacity: 1;
+}
+
+.navbar.scrolled .logo-img--oscuro {
+  opacity: 0;
+}
+
+@media (max-width: 768px) {
+  .logo-img {
+    height: 60px;
+  }
+}
+
+.logo-img-footer {
+  height: 70px;
+  width: auto;
+  display: block;
+  margin-bottom: 0;
+}
+
+@media (max-width: 768px) {
+  .logo-img-footer {
+    height: 40px;
+  }
 }
 
 /* ─── Carrete de imágenes ─────────────────────────────────────── */

@@ -7,7 +7,7 @@
     <meta name="description" content="FORLAWDER — Servicios legales especializados.">
     <meta http-equiv="Content-Security-Policy"
         content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self'; connect-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self';">
-    <link rel="preload" as="image" href="resources/images/FORLAWDER LOGO.png">
+    <link rel="preload" as="image" href="resources/images/fondo-prueba.jpg">
     <title>FORLAWDER</title>
     <link rel="stylesheet" href="resources/css/style.min.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -21,10 +21,9 @@
     <header>
         <nav class="navbar">
             <div class="logo-container">
-                <h1 class="logo-title">FORLAWDER</h1>
-                <span class="logo-subtitle">ABOGADOS - AUDITORES</span>
+                <img src="resources/images/LOGO  blanco letra.png" alt="FORLAWDER" class="logo-img logo-img--claro">
+                <img src="resources/images/FORLAWDER LOGO.png" alt="FORLAWDER" class="logo-img logo-img--oscuro">
             </div>
-
 
             <button class="navbar__toggle" aria-label="Abrir menú" aria-expanded="false">
                 <span></span>
@@ -51,7 +50,14 @@
 
         <section id="Inicio" class="section-offset hero">
             <div class="hero__fondo-wrap">
-                <img src="resources/images/fondo-prueba.jpg" alt="" aria-hidden="true" class="hero__fondo" decoding="async" loading="eager">
+                <img
+                    src="resources/images/fondo-prueba.jpg"
+                    class="hero__fondo"
+                    loading="eager"
+                    decoding="async"
+                    fetchpriority="high"
+                    alt=""
+                    aria-hidden="true">
             </div>
             <div class="hero__contenido">
                     <p class="hero__tagline">Tú construyes el futuro que quieres &middot; Nosotros ayudamos a protegerlo.
@@ -67,17 +73,16 @@
                         stroke-linejoin="round" />
                 </svg>
             </a>
-        </section>
+                </section>
 
-
-        <section id="Nosotros" class="section-offset seccion-intro">
+                <section id="Nosotros" class="section-offset seccion-intro">
             <div class="contenedor">
                 <div class="intro__grid">
 
                     <div class="intro__texto" data-reveal="left">
                         <span class="etiqueta-seccion">Quiénes somos</span>
                         <h2 class="titulo-seccion">
-                            Firma de abogados comprometida con sus intereses
+                            Firma de abogados y auditores comprometidos con tus intereses
                         </h2>
                         <p>
                             Hay personas que trabajan años para construir algo importante... <br>
@@ -93,8 +98,13 @@
                     <div class="intro__visual" data-reveal="right">
 
                         <div class="visual-placeholder">
-                            <img src="resources/images/forlawder-office.jpeg" alt="Oficinas FORLAWDER" loading="lazy"
-                                decoding="async" width="800" height="534" class="visual-placeholder__img">
+                            <img
+                                src="resources/images/forlawder-office.jpeg"
+                                alt="Oficinas FORLAWDER"
+                                loading="lazy"
+                                decoding="async"
+                                width="800" height="534"
+                                class="visual-placeholder__img responsive-img">
                         </div>
                     </div>
 
@@ -321,8 +331,6 @@
                 </div>
                 <div class="servicios__grid">
 
-
-
                     <article class="tarjeta-servicio" data-reveal data-delay="2">
                         <div class="tarjeta-servicio__icono" aria-hidden="true">
                             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 640">
@@ -473,7 +481,7 @@
             <div class="contenedor">
                 <div class="cta__contenido" data-reveal>
                     <h2 class="titulo-seccion cta__titulo">
-                        ¿Listo para resolver su situación legal?
+                        ¿Listo para resolver tu situación legal?
                     </h2>
                     <a href="#Contacto" class="btn btn--outline-blanco">Contactar ahora</a>
                 </div>
@@ -538,12 +546,10 @@
             <div class="footer__grid">
 
                 <div class="footer__marca">
-                    <div class="logo-container">
-                        <h1 class="logo-title" style="text-align:left; color: #ffffff;">FORLAWDER</h1>
-                        <h3 class="logo-subtitle" style="text-align:left; color: #ffffff; padding-left: 1.5rem;">
-                            Abogados y Auditores</h3>
+                    <div class="logo-container" style="padding-bottom: 0px;">
+                        <img src="resources/images/LOGO  blanco letra.png" alt="FORLAWDER" class="logo-img-footer">
                     </div>
-                    <p style="padding-top: 1rem;">Somos una firma de abogados y auditores que combina experiencia legal
+                    <p style="padding-top: 0.1rem;">Somos una firma de abogados y auditores que combina experiencia legal
                         y financiera.</p>
                 </div>
 
@@ -612,7 +618,7 @@
         </button>
     </div>
 
-    <script src="resources/js/navbar.min.js" defer></script>
+    <script src="resources/js/navbar.js" defer></script>
 </body>
 
 </html>

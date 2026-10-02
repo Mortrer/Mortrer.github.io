@@ -61,6 +61,53 @@
   }
 })();
 
+/* ─── Hero background loader (moved from inline) ──────────────────
+   Exposed under global `FORLAWDER` namespace as `initHeroBg()`
+   so more modules can be added to the same file in the future.
+──────────────────────────────────────────────────────────────── */
+(function () {
+  'use strict';
+
+  var ns = window.FORLAWDER = window.FORLAWDER || {};
+
+  ns.initHeroBg = function () {
+    var img = document.querySelector('.hero__fondo');
+    if (!img) return;
+
+    function markLoaded() { img.classList.add('loaded'); }
+
+    if (img.complete && img.naturalWidth !== 0) {
+      markLoaded();
+    } else {
+      img.addEventListener('load', markLoaded);
+      img.addEventListener('error', markLoaded);
+    }
+  };
+
+  /* Inicializador reutilizable para imágenes responsive (fade-in) */
+  ns.initResponsiveImages = function (selector) {
+    var imgs = document.querySelectorAll(selector || '.responsive-img');
+    if (!imgs || !imgs.length) return;
+    Array.prototype.forEach.call(imgs, function (img) {
+      function mark() { img.classList.add('loaded'); }
+      if (img.complete && img.naturalWidth !== 0) mark();
+      else { img.addEventListener('load', mark); img.addEventListener('error', mark); }
+    });
+  };
+
+  function FORLAWDER_autoInit() {
+    ns.initHeroBg();
+    ns.initResponsiveImages('.responsive-img');
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', FORLAWDER_autoInit);
+  } else {
+    FORLAWDER_autoInit();
+  }
+
+})();
+
 (function () {
   'use strict';
 
