@@ -1,0 +1,394 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Política de Privacidad — FORLAWDER Abogados y Auditores.">
+    <meta http-equiv="Content-Security-Policy"
+        content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self'; connect-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self';">
+    <title>Política de Privacidad — FORLAWDER</title>
+    <link rel="stylesheet" href="resources/css/style.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;600&family=Montserrat:wght@300;400;500&family=Raleway:wght@300;400&display=swap"
+        rel="stylesheet">
+    <style>
+        .politica-hero {
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: clamp(300px, 40vh, 400px);
+            padding: calc(var(--nav-height) + 2rem) 5% 3.5rem;
+            text-align: center;
+            overflow: hidden;
+            background: var(--brand-navy);
+        }
+
+        .politica-hero::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(to bottom,
+                rgba(1, 46, 64, 0.55) 0%,
+                rgba(1, 46, 64, 0.35) 50%,
+                rgba(1, 46, 64, 0.65) 100%);
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        .politica-hero .hero__fondo-wrap {
+            position: absolute;
+            inset: 0;
+            z-index: 0;
+            overflow: hidden;
+        }
+
+        .politica-hero .hero__fondo {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: center;
+            display: block;
+            opacity: 0;
+            transition: opacity 360ms ease;
+        }
+
+        .politica-hero .hero__fondo.loaded {
+            opacity: 1;
+        }
+
+        .politica-hero .hero__contenido {
+            position: relative;
+            z-index: 2;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 1rem;
+            max-width: 760px;
+        }
+
+        .politica-hero h1 {
+            font-family: 'Cormorant Garamond', serif;
+            font-weight: 600;
+            font-size: clamp(2rem, 4vw, 3rem);
+            color: #ffffff;
+            margin-bottom: 0;
+            line-height: 1.2;
+        }
+
+        .politica-hero p {
+            font-family: 'Montserrat', sans-serif;
+            font-size: clamp(0.95rem, 2.2vw, 1.35rem);
+            font-weight: 300;
+            letter-spacing: 0.14em;
+            text-transform: uppercase;
+            color: rgba(255, 255, 255, 0.90);
+            max-width: 60ch;
+            margin-inline: auto;
+        }
+
+        .politica-body {
+            padding: 5rem 5%;
+            background: #ffffff;
+            color: #4a5568;
+            line-height: 1.85;
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 300;
+        }
+
+        .politica-body .contenedor {
+            max-width: 900px;
+        }
+
+        .politica-body h2 {
+            font-family: 'Cormorant Garamond', serif;
+            font-weight: 600;
+            font-size: clamp(1.4rem, 2.5vw, 1.8rem);
+            color: var(--brand-navy);
+            margin-top: 2.5rem;
+            margin-bottom: 0.75rem;
+        }
+
+        .politica-body h2:first-of-type {
+            margin-top: 0;
+        }
+
+        .politica-body p,
+        .politica-body li {
+            font-size: 0.95rem;
+            margin-bottom: 0.85rem;
+        }
+
+        .politica-body ul {
+            padding-left: 1.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .politica-body strong {
+            color: var(--brand-navy);
+            font-weight: 600;
+        }
+
+        .politica-body a {
+            color: var(--brand-pink);
+            text-decoration: none;
+        }
+
+        .politica-body a:hover {
+            text-decoration: underline;
+        }
+
+        .politica-meta {
+            font-size: 0.8rem;
+            color: #7a8694;
+            font-style: italic;
+            border-top: 1px solid var(--brand-gray);
+            padding-top: 1.5rem;
+            margin-top: 3rem;
+        }
+
+        @media (max-width: 768px) {
+            .politica-hero {
+                padding: calc(var(--nav-height) + 3rem) 5% 3rem;
+            }
+
+            .politica-body {
+                padding: 3.5rem 5%;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <nav class="navbar">
+            <a href="index.html" style="display: flex; align-items: center; text-decoration: none;">
+                <div class="logo-container">
+                    <img src="resources/images/LOGO  blanco letra.png" alt="FORLAWDER" class="logo-img logo-img--claro">
+                    <img src="resources/images/FORLAWDER LOGO.png" alt="FORLAWDER" class="logo-img logo-img--oscuro">
+                </div>
+            </a>
+
+            <button class="navbar__toggle" aria-label="Abrir menú" aria-expanded="false">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+
+            <ul class="navbar__links">
+                <li><a href="index.html#Inicio">Inicio</a></li>
+                <li><a href="index.html#Nosotros">Nosotros</a></li>
+                <li class="navbar__dropdown">
+                    <a href="index.html#Servicios">Servicios</a>
+                    <ul class="navbar__submenu">
+                        <li><a href="index.html#Servicios_legal">Legal</a></li>
+                        <li><a href="index.html#Servicios_auditoria">Auditoría</a></li>
+                    </ul>
+                </li>
+                <li><a href="index.html#Contacto">Contacto</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section class="politica-hero">
+            <div class="hero__fondo-wrap">
+                <img src="resources/images/fondo-prueba.jpg" alt="" aria-hidden="true" class="hero__fondo" loading="eager" decoding="async" fetchpriority="high">
+            </div>
+            <div class="hero__contenido">
+                <h1>Política de Privacidad</h1>
+                <p>Última actualización: octubre 2026 — FORLAWDER Abogados &amp; Auditores</p>
+            </div>
+        </section>
+
+        <section class="politica-body">
+            <div class="contenedor">
+
+                <h2>1. Identidad del responsable</h2>
+                <p>
+                    <strong>FORLAWDER — Abogados y Auditores</strong>, con domicilio en 0 Av. 1-67 zona 7,
+                    Quetzaltenango, Guatemala, es el responsable del tratamiento de los datos personales
+                    recabados a través de este sitio web.
+                </p>
+                <p>
+                    Para cualquier asunto relacionado con el tratamiento de sus datos personales, puede
+                    contactarnos al correo <a href="mailto:forlawder@gmail.com">forlawder@gmail.com</a>
+                    o al teléfono <strong>+502 3606 5524</strong>.
+                </p>
+
+                <h2>2. Datos personales que recabamos</h2>
+                <p>A través del formulario de contacto de este sitio web, recabamos las siguientes categorías de datos personales:</p>
+                <ul>
+                    <li><strong>Nombre completo</strong> — para identificarle y dirigirnos a usted.</li>
+                    <li><strong>Correo electrónico</strong> — para responder su consulta.</li>
+                    <li><strong>Número de contacto</strong> — opcional, para comunicarnos por vía telefónica si usted lo prefiere.</li>
+                    <li><strong>Mensaje</strong> — el contenido de su consulta o solicitud.</li>
+                </ul>
+                <p>
+                    Adicionalmente, este sitio web utiliza <strong>Google Fonts</strong>, un servicio de
+                    Google que, al cargar las tipografías en su navegador, transmite a sus servidores
+                    información técnica como su dirección IP.
+                </p>
+
+                <h2>3. Finalidad del tratamiento</h2>
+                <p>Los datos personales recabados a través del formulario de contacto se utilizan exclusivamente para:</p>
+                <ul>
+                    <li>Atender las consultas, solicitudes o mensajes que usted nos envíe voluntariamente.</li>
+                    <li>Brindarle información sobre nuestros servicios legales y de auditoría en caso de que usted lo requiera.</li>
+                    <li>Establecer una relación profesional inicial cuando aplique.</li>
+                </ul>
+                <p>
+                    <strong>No utilizamos sus datos con fines de mercadeo masivo, elaboración de perfiles,
+                    ni los compartimos con terceros con fines comerciales.</strong>
+                </p>
+
+                <h2>4. Base legal del tratamiento</h2>
+                <p>
+                    El tratamiento de sus datos se fundamenta en su <strong>consentimiento expreso</strong>,
+                    otorgado al completar y enviar el formulario de contacto de este sitio web.
+                </p>
+                <p>
+                    En el caso de transferencias internacionales derivadas del uso de Google Fonts, la base
+                    legal es el <strong>interés legítimo</strong> de garantizar la correcta presentación
+                    tipográfica del sitio.
+                </p>
+
+                <h2>5. Transferencias internacionales</h2>
+                <p>
+                    Al utilizar Google Fonts, sus datos (incluida su dirección IP) son transmitidos a
+                    Google LLC, con servidores principalmente en Estados Unidos. Esta transferencia se
+                    realiza bajo las cláusulas contractuales tipo y demás garantías ofrecidas por Google
+                    para cumplir con estándares internacionales de protección de datos.
+                </p>
+
+                <h2>6. Conservación de los datos</h2>
+                <p>
+                    Los datos personales recabados a través del formulario se conservarán durante el
+                    tiempo necesario para atender su consulta y, posteriormente, durante el plazo legal
+                    aplicable a las obligaciones de conservación documental propias del ejercicio
+                    profesional de la abogacía y la auditoría.
+                </p>
+                <p>
+                    Una vez cumplido dicho plazo, los datos serán eliminados de forma segura.
+                </p>
+
+                <h2>7. Medidas de seguridad</h2>
+                <p>Este sitio web implementa medidas técnicas y organizativas razonables para proteger sus datos, incluyendo:</p>
+                <ul>
+                    <li>Política de seguridad de contenido (<strong>CSP</strong>) estricta, que limita los recursos que pueden cargarse.</li>
+                    <li>Carga de imágenes, hojas de estilo y scripts únicamente desde el propio dominio.</li>
+                    <li>Conexión cifrada (<strong>HTTPS</strong>) cuando el sitio es accedido a través de su dominio público.</li>
+                    <li>Sanitización de rutas de imágenes y textos antes de mostrarlos en pantalla, para prevenir inyecciones de código.</li>
+                </ul>
+
+                <h2>8. Derechos del titular de los datos</h2>
+                <p>Usted tiene derecho a:</p>
+                <ul>
+                    <li><strong>Acceder</strong> a los datos personales que tenemos sobre usted.</li>
+                    <li><strong>Rectificar</strong> cualquier dato inexacto o desactualizado.</li>
+                    <li><strong>Solicitar la supresión</strong> de sus datos cuando ya no sean necesarios.</li>
+                    <li><strong>Oponerse</strong> al tratamiento de sus datos.</li>
+                    <li><strong>Limitar</strong> el uso de sus datos en determinadas circunstancias.</li>
+                    <li><strong>Retirar su consentimiento</strong> en cualquier momento, sin que ello afecte la licitud del tratamiento previo.</li>
+                </ul>
+                <p>
+                    Para ejercer cualquiera de estos derechos, escríbanos a
+                    <a href="mailto:forlawder@gmail.com">forlawder@gmail.com</a> e indicaremos
+                    el procedimiento a seguir.
+                </p>
+
+                <h2>9. Cookies y tecnologías similares</h2>
+                <p>
+                    <strong>Este sitio web no utiliza cookies propias ni de terceros con fines de rastreo,
+                    analítica o publicidad.</strong> Tampoco hace uso de almacenamiento local del navegador
+                    (<em>localStorage</em>, <em>sessionStorage</em>) ni de tecnologías equivalentes.
+                </p>
+                <p>
+                    Por esta razón, no es necesario mostrar un banner de consentimiento de cookies al
+                    ingresar al sitio.
+                </p>
+
+                <h2>10. Enlaces a sitios de terceros</h2>
+                <p>
+                    Este sitio web puede contener enlaces a sitios externos (por ejemplo, redes sociales
+                    o plataformas de terceros). FORLAWDER no se responsabiliza por las prácticas de
+                    privacidad de dichos sitios. Le recomendamos leer las políticas de privacidad de
+                    cada uno antes de proporcionarles información personal.
+                </p>
+
+                <h2>11. Modificaciones a esta política</h2>
+                <p>
+                    FORLAWDER se reserva el derecho de modificar esta política de privacidad para
+                    adaptarla a novedades legislativas o jurisprudenciales. En caso de cambios
+                    sustanciales, se notificará mediante la actualización de la fecha al inicio de
+                    este documento y, si corresponde, mediante un aviso visible en el sitio.
+                </p>
+
+                <h2>12. Ley aplicable y jurisdicción</h2>
+                <p>
+                    Esta política se rige por la legislación vigente en la República de Guatemala,
+                    particularmente por el Decreto 57-2005 (Ley de Protección de Datos Personales) y
+                    demás normativa complementaria. Para usuarios que nos visiten desde la Unión Europea,
+                    nuestras prácticas también procuran alinearse con el Reglamento General de Protección
+                    de Datos (RGPD / GDPR).
+                </p>
+                <p>
+                    Cualquier controversia derivada de la interpretación o aplicación de esta política
+                    será resuelta por los tribunales competentes de Quetzaltenango, Guatemala.
+                </p>
+
+                <p class="politica-meta">
+                    Documento elaborado por FORLAWDER Abogados &amp; Auditores — octubre 2026.<br>
+                    Para consultas sobre privacidad: <a href="mailto:forlawder@gmail.com">forlawder@gmail.com</a>
+                </p>
+
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <div class="contenedor">
+            <div class="footer__grid">
+
+                <div class="footer__marca">
+                    <div class="logo-container" style="padding-bottom: 0px;">
+                        <img src="resources/images/LOGO  blanco letra.png" alt="FORLAWDER" class="logo-img-footer">
+                    </div>
+                    <p style="padding-top: 0.1rem;">Somos una firma de abogados y auditores que combina experiencia legal
+                        y financiera.</p>
+                </div>
+
+                <div class="footer__nav">
+                    <h4>Navegación</h4>
+                    <ul>
+                        <li><a href="index.html#Inicio">Inicio</a></li>
+                        <li><a href="index.html#Nosotros">Nosotros</a></li>
+                        <li><a href="index.html#Servicios">Servicios</a></li>
+                        <li><a href="index.html#Contacto">Contacto</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer__info">
+                    <h4>Contacto</h4>
+                    <p>0 Av. 1-67 zona 7<br>Quetzaltenango, Guatemala</p>
+                    <p>forlawder@gmail.com</p>
+                    <p>+502 3606 5524</p>
+                </div>
+
+            </div>
+            <div class="footer__base">
+                <p>&copy; 2026 FORLAWDER. Todos los derechos reservados. ·
+                    <a href="politicas.html" style="color: rgba(255,255,255,0.55); text-decoration: none;">Política de Privacidad</a>
+                </p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="resources/js/navbar.js" defer></script>
+</body>
+
+</html>
