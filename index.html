@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="FORLAWDER — Servicios legales especializados.">
     <meta http-equiv="Content-Security-Policy"
-        content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self'; connect-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self';">
+        content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self'; connect-src 'self' https://formspree.io; object-src 'none'; base-uri 'self'; form-action 'self' https://formspree.io;">
     <link rel="preload" as="image" href="resources/images/fondo-prueba.jpg">
     <title>FORLAWDER</title>
     <link rel="stylesheet" href="resources/css/style.min.css">
@@ -466,30 +466,53 @@
                     </div>
                 </div>
                 <div class="columna-formulario">
-                    <form class="formulario" action="" method="post">
-                        <div class="grupo-campo">
-                            <label for="nombre">Nombre</label>
-                            <input type="text" id="nombre" name="nombre" required placeholder="Nombre completo">
+                    <form id="form-contacto" class="formulario" action="https://formspree.io/f/xoejklbr" method="POST">
+                        <input type="text" name="_gotcha" style="display:none">
+
+                        <div id="form-success" class="form-success" style="display:none;">
+                            <svg width="48" height="48" viewBox="0 0 48 48" fill="none" aria-hidden="true">
+                                <circle cx="24" cy="24" r="22" stroke="#012E40" stroke-width="2"/>
+                                <path d="M14 24l7 7 13-13" stroke="#012E40" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>
+                            <h3>¡Consulta enviada!</h3>
+                            <p>Nos pondremos en contacto con usted pronto.</p>
+                            <button type="button" id="btn-nueva-consulta" class="btn btn--primary">Enviar otra consulta</button>
                         </div>
 
-
-                        <div class="grupo-fila">
+                        <div id="form-fields">
                             <div class="grupo-campo">
-                                <label for="email">E-mail</label>
-                                <input type="email" id="email" name="email" required placeholder="E-mail">
+                                <label for="nombre">Nombre</label>
+                                <input type="text" id="nombre" name="nombre" required placeholder="Nombre completo" autocomplete="name">
                             </div>
-                            <div class="grupo-campo">
-                                <label for="celular">Número de contacto</label>
-                                <input type="tel" id="celular" name="celular" placeholder="Número de contacto">
-                            </div>
-                        </div>
 
-                        <div class="grupo-campo">
-                            <label for="mensaje">Mensaje</label>
-                            <textarea id="mensaje" name="mensaje" rows="4" required
-                                placeholder="Escribe tu mensaje aquí..."></textarea>
+
+                            <div class="grupo-fila">
+                                <div class="grupo-campo">
+                                    <label for="email">E-mail</label>
+                                    <input type="email" id="email" name="email" required placeholder="E-mail" autocomplete="email">
+                                </div>
+                                <div class="grupo-campo">
+                                    <label for="celular">Número de contacto</label>
+                                    <input type="tel" id="celular" name="celular" placeholder="Número de contacto" autocomplete="tel">
+                                </div>
+                            </div>
+
+                            <div class="grupo-campo">
+                                <label for="mensaje">Mensaje</label>
+                                <textarea id="mensaje" name="mensaje" rows="4" required
+                                    placeholder="Escribe tu mensaje aquí..."></textarea>
+                            </div>
+
+                            <div class="grupo-campo checkbox-campo">
+                                <label class="checkbox-label">
+                                    <input type="checkbox" id="acepto-politicas" name="acepto_politicas">
+                                    <span class="checkbox-custom"></span>
+                                    <span class="checkbox-text">Acepto la <a href="politicas.html" target="_blank">Política de Privacidad</a></span>
+                                </label>
+                            </div>
+
+                            <button type="submit" id="btn-enviar">Enviar</button>
                         </div>
-                        <button type="submit">Enviar</button>
                     </form>
 
                 </div>
@@ -580,6 +603,54 @@
     </div>
 
     <script src="resources/js/navbar.js" defer></script>
+    <script>
+    document.addEventListener('DOMContentLoaded', function() {
+        var form = document.getElementById('form-contacto');
+        var btn = document.getElementById('btn-enviar');
+        var checkbox = document.getElementById('acepto-politicas');
+        var btnNueva = document.getElementById('btn-nueva-consulta');
+
+        if (form && btn) {
+            form.addEventListener('submit', function(e) {
+                if (checkbox && !checkbox.checked) {
+                    e.preventDefault();
+                    alert('Debe aceptar la Politica de Privacidad para enviar su consulta.');
+                    return;
+                }
+
+                e.preventDefault();
+
+                btn.textContent = 'Enviando...';
+                btn.disabled = true;
+                btn.style.opacity = '0.7';
+
+                var formData = new FormData(form);
+
+                fetch(form.action, {
+                    method: 'POST',
+                    body: formData,
+                    mode: 'no-cors'
+                })
+                .then(function() {
+                    form.classList.add('submitted');
+                })
+                .catch(function() {
+                    form.classList.add('submitted');
+                });
+            });
+
+            if (btnNueva) {
+                btnNueva.addEventListener('click', function() {
+                    form.reset();
+                    form.classList.remove('submitted');
+                    btn.textContent = 'Enviar';
+                    btn.disabled = false;
+                    btn.style.opacity = '1';
+                });
+            }
+        }
+    });
+    </script>
 </body>
 
 </html>
